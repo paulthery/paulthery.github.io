@@ -1,6 +1,97 @@
 {
-  "projects": {},
+  "projects": {
+    "Costa Rica l": [
+      "/albums/projects/Costa Rica l/IMG_9641.png",
+      "/albums/projects/Costa Rica l/IMG_9685.png",
+      "/albums/projects/Costa Rica l/IMG_9686.png",
+      "/albums/projects/Costa Rica l/IMG_9707.png",
+      "/albums/projects/Costa Rica l/IMG_9719.png",
+      "/albums/projects/Costa Rica l/IMG_9724.png",
+      "/albums/projects/Costa Rica l/IMG_9730.png",
+      "/albums/projects/Costa Rica l/IMG_9737.png",
+      "/albums/projects/Costa Rica l/IMG_9756.png",
+      "/albums/projects/Costa Rica l/IMG_9768.png",
+      "/albums/projects/Costa Rica l/IMG_9794.png",
+      "/albums/projects/Costa Rica l/IMG_9798.png",
+      "/albums/projects/Costa Rica l/IMG_9799.png"
+    ],
+    "Costa Rica ll": [
+      "/albums/projects/Costa Rica ll/IMG_9641.png",
+      "/albums/projects/Costa Rica ll/IMG_9685.png",
+      "/albums/projects/Costa Rica ll/IMG_9686.png",
+      "/albums/projects/Costa Rica ll/IMG_9707.png",
+      "/albums/projects/Costa Rica ll/IMG_9719.png",
+      "/albums/projects/Costa Rica ll/IMG_9724.png",
+      "/albums/projects/Costa Rica ll/IMG_9730.png",
+      "/albums/projects/Costa Rica ll/IMG_9737.png",
+      "/albums/projects/Costa Rica ll/IMG_9756.png",
+      "/albums/projects/Costa Rica ll/IMG_9768.png",
+      "/albums/projects/Costa Rica ll/IMG_9794.png",
+      "/albums/projects/Costa Rica ll/IMG_9798.png",
+      "/albums/projects/Costa Rica ll/IMG_9799.png"
+    ],
+    "Costa Rica lll": [
+      "/albums/projects/Costa Rica lll/IMG_9641.png",
+      "/albums/projects/Costa Rica lll/IMG_9685.png",
+      "/albums/projects/Costa Rica lll/IMG_9686.png",
+      "/albums/projects/Costa Rica lll/IMG_9707.png",
+      "/albums/projects/Costa Rica lll/IMG_9719.png",
+      "/albums/projects/Costa Rica lll/IMG_9724.png",
+      "/albums/projects/Costa Rica lll/IMG_9730.png",
+      "/albums/projects/Costa Rica lll/IMG_9737.png",
+      "/albums/projects/Costa Rica lll/IMG_9756.png",
+      "/albums/projects/Costa Rica lll/IMG_9768.png",
+      "/albums/projects/Costa Rica lll/IMG_9794.png",
+      "/albums/projects/Costa Rica lll/IMG_9798.png",
+      "/albums/projects/Costa Rica lll/IMG_9799.png"
+    ],
+    "Indonesia l": [
+      "/albums/projects/Indonesia l/IMG_9641.png",
+      "/albums/projects/Indonesia l/IMG_9685.png",
+      "/albums/projects/Indonesia l/IMG_9686.png",
+      "/albums/projects/Indonesia l/IMG_9707.png",
+      "/albums/projects/Indonesia l/IMG_9719.png",
+      "/albums/projects/Indonesia l/IMG_9724.png",
+      "/albums/projects/Indonesia l/IMG_9730.png",
+      "/albums/projects/Indonesia l/IMG_9737.png",
+      "/albums/projects/Indonesia l/IMG_9756.png",
+      "/albums/projects/Indonesia l/IMG_9768.png",
+      "/albums/projects/Indonesia l/IMG_9794.png",
+      "/albums/projects/Indonesia l/IMG_9798.png",
+      "/albums/projects/Indonesia l/IMG_9799.png"
+    ],
+    "Indonesia ll": [
+      "/albums/projects/Indonesia ll/IMG_9641.png",
+      "/albums/projects/Indonesia ll/IMG_9685.png",
+      "/albums/projects/Indonesia ll/IMG_9686.png",
+      "/albums/projects/Indonesia ll/IMG_9707.png",
+      "/albums/projects/Indonesia ll/IMG_9719.png",
+      "/albums/projects/Indonesia ll/IMG_9724.png",
+      "/albums/projects/Indonesia ll/IMG_9730.png",
+      "/albums/projects/Indonesia ll/IMG_9737.png",
+      "/albums/projects/Indonesia ll/IMG_9756.png",
+      "/albums/projects/Indonesia ll/IMG_9768.png",
+      "/albums/projects/Indonesia ll/IMG_9794.png",
+      "/albums/projects/Indonesia ll/IMG_9798.png",
+      "/albums/projects/Indonesia ll/IMG_9799.png"
+    ]
+  },
   "work": {
+    "LV SS 24": [
+      "/albums/work/LV SS 24/IMG_9641.png",
+      "/albums/work/LV SS 24/IMG_9685.png",
+      "/albums/work/LV SS 24/IMG_9686.png",
+      "/albums/work/LV SS 24/IMG_9707.png",
+      "/albums/work/LV SS 24/IMG_9719.png",
+      "/albums/work/LV SS 24/IMG_9724.png",
+      "/albums/work/LV SS 24/IMG_9730.png",
+      "/albums/work/LV SS 24/IMG_9737.png",
+      "/albums/work/LV SS 24/IMG_9756.png",
+      "/albums/work/LV SS 24/IMG_9768.png",
+      "/albums/work/LV SS 24/IMG_9794.png",
+      "/albums/work/LV SS 24/IMG_9798.png",
+      "/albums/work/LV SS 24/IMG_9799.png"
+    ],
     "Recent": [
       "/albums/work/Recent/image_001.png",
       "/albums/work/Recent/image_002.png",
@@ -68,6 +159,5 @@
       "/albums/work/Work l/IMG_9798.png",
       "/albums/work/Work l/IMG_9799.png"
     ]
-  },
-  "books": {}
+  }
 }
