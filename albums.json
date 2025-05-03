@@ -1,4 +1,5 @@
 {
+  "books": {},
   "projects": {
     "Costa Rica l": [
       "/albums/projects/Costa Rica l/IMG_9641.png",
@@ -74,6 +75,21 @@
       "/albums/projects/Indonesia ll/IMG_9794.png",
       "/albums/projects/Indonesia ll/IMG_9798.png",
       "/albums/projects/Indonesia ll/IMG_9799.png"
+    ],
+    "Mauritius": [
+      "/albums/projects/Mauritius/IMG_9641.png",
+      "/albums/projects/Mauritius/IMG_9685.png",
+      "/albums/projects/Mauritius/IMG_9686.png",
+      "/albums/projects/Mauritius/IMG_9707.png",
+      "/albums/projects/Mauritius/IMG_9719.png",
+      "/albums/projects/Mauritius/IMG_9724.png",
+      "/albums/projects/Mauritius/IMG_9730.png",
+      "/albums/projects/Mauritius/IMG_9737.png",
+      "/albums/projects/Mauritius/IMG_9756.png",
+      "/albums/projects/Mauritius/IMG_9768.png",
+      "/albums/projects/Mauritius/IMG_9794.png",
+      "/albums/projects/Mauritius/IMG_9798.png",
+      "/albums/projects/Mauritius/IMG_9799.png"
     ]
   },
   "work": {
@@ -158,6 +174,36 @@
       "/albums/work/Work l/IMG_9794.png",
       "/albums/work/Work l/IMG_9798.png",
       "/albums/work/Work l/IMG_9799.png"
+    ],
+    "Work ll": [
+      "/albums/work/Work ll/IMG_9641.png",
+      "/albums/work/Work ll/IMG_9685.png",
+      "/albums/work/Work ll/IMG_9686.png",
+      "/albums/work/Work ll/IMG_9707.png",
+      "/albums/work/Work ll/IMG_9719.png",
+      "/albums/work/Work ll/IMG_9724.png",
+      "/albums/work/Work ll/IMG_9730.png",
+      "/albums/work/Work ll/IMG_9737.png",
+      "/albums/work/Work ll/IMG_9756.png",
+      "/albums/work/Work ll/IMG_9768.png",
+      "/albums/work/Work ll/IMG_9794.png",
+      "/albums/work/Work ll/IMG_9798.png",
+      "/albums/work/Work ll/IMG_9799.png"
+    ],
+    "Work lll": [
+      "/albums/work/Work lll/IMG_9641.png",
+      "/albums/work/Work lll/IMG_9685.png",
+      "/albums/work/Work lll/IMG_9686.png",
+      "/albums/work/Work lll/IMG_9707.png",
+      "/albums/work/Work lll/IMG_9719.png",
+      "/albums/work/Work lll/IMG_9724.png",
+      "/albums/work/Work lll/IMG_9730.png",
+      "/albums/work/Work lll/IMG_9737.png",
+      "/albums/work/Work lll/IMG_9756.png",
+      "/albums/work/Work lll/IMG_9768.png",
+      "/albums/work/Work lll/IMG_9794.png",
+      "/albums/work/Work lll/IMG_9798.png",
+      "/albums/work/Work lll/IMG_9799.png"
     ]
   }
 }
