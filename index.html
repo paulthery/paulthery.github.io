@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paul Thery</title>
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#000000">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="msapplication-TileImage" content="mstile-144x144.png">
+  
+  <!-- Chargement conditionnel du JS mobile -->
+  <script>
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 
+        (navigator.maxTouchPoints && navigator.maxTouchPoints > 2)) {
+        const mobileScript = document.createElement('script');
+        mobileScript.src = '/assets/js/mobile.js';
+        mobileScript.defer = true;
+        document.head.appendChild(mobileScript);
+    }
+  </script>
+</head>
+<body>
+  <div id="curtain-overlay"></div>
+  <div id="intro-text">
+    <span class="regular">Paul Thery</span>
+    <span class="light">Photographer</span>
+  </div>
+
+  <div id="main-content">
+    <div id="image-wrapper">
+      <div id="reveal-mask"></div>
+      <img id="main-image" src="/albums/work/recent/image_001.png" alt="Image principale">
+      <video id="main-video" style="display: none;" muted loop autoplay playsinline></video>
+      <div id="image-mask"></div>
+    </div>
+    <nav id="nav">
+      <a href="#" id="index-trigger">Index</a><span class="separator"> — </span><a href="#" data-gallery>Gallery</a>
+    </nav>
+  </div>
+
+  <div id="gallery-overlay">
+    <div id="gallery-top-mask"></div>
+    <div id="gallery-bottom-mask"></div>
+    <div id="gallery-nav">
+      <span>Recent</span><span class="separator"> — </span><span id="close-gallery">Close</span>
+    </div>
+    <div id="gallery-scroll">
+      <div id="gallery-grid"></div>
+    </div>
+  </div>
+
+  <div id="index-overlay">
+    <div id="index-mask"></div>
+    <div id="index-content"></div>
+  </div>
+
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+/* === STYLE MOBILE UNIQUEMENT === */
+
+/* Variables redéfinies pour mobile */
+:root {
+    --margin-vh-offset: 110px;
+}
+  
+/* Texte d'introduction - position et taille adaptées au mobile */
+#intro-text {
+    left: 20px;
+    font-size: 16px; /* Taille ajustée pour une meilleure lisibilité */
+    gap: 1em;
+}
+  
+#intro-text .regular {
+    margin-right: 1em;
+}
+  
+#intro-text .medium {
+    margin-right: 30px;
+}
+  
+/* Navigation principale */
+#nav {
+    font-size: 40px;
+    height: 80px;
+    line-height: 80px;
+}
+  
+#nav a {
+    margin: 0 0.4em;
+}
+  
+/* Wrapper d'image - proportions optimisées pour mobile */
+#image-wrapper {
+    max-height: calc(var(--vh, 1vh) * 100 - var(--margin-vh-offset));
+}
+  
+/* Galerie - grille réduite pour mobile */
+#gallery-grid {
+    grid-template-columns: repeat(auto-fit, 100px);
+    justify-content: center;
+    column-gap: 15px;
+    row-gap: 20px;
+    max-width: calc(7 * 100px + 6 * 15px);
+}
+  
+.gallery-thumb {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+}
+  
+/* Navigation de galerie */
+#gallery-nav {
+    font-size: 14px;
+    height: 80px;
+    line-height: 80px;
+}
+  
+/* Index overlay - ajustements de layout */
+#index-content {
+    width: 100%;
+    padding-top: 80px;
+}
+  
+#index-overlay.active .index-header {
+    padding: 0 20px;
+    margin-bottom: 2em;
+}
+  
+#index-overlay.active .index-header .medium {
+    font-size: 14px;
+}
+  
+#index-overlay.active .albums-list {
+    padding: 0 20px;
+}
+  
+/* Curseur personnalisé désactivé sur mobile */
+#custom-cursor {
+    display: none !important;
+}
+  
+body {
+    cursor: default !important;
+}
+  
+/* Ajustements pour les très petits écrans */
+@media (max-width: 480px) {
+    #nav,
+    #gallery-nav {
+        font-size: 12px;
+    }
+    
+    #gallery-grid {
+        grid-template-columns: repeat(auto-fit, 90px);
+        column-gap: 10px;
+        row-gap: 15px;
+    }
+    
+    .gallery-thumb {
+        width: 90px;
+        min-width: 90px;
+        max-width: 90px;
+    }
+    
+    #index-overlay.active .albums-list a {
+        font-size: 11px !important;
+    }
+    
+    #index-overlay.active .albums-list .count {
+        font-size: 11px;
+    }
+}
+  
+/* Assurer que les transitions restent fluides sur mobile */
+*, *::before, *::after {
+    -webkit-tap-highlight-color: transparent;
+}
+  
+/* Optimisation des performances pour mobile */
+#main-image,
+#main-video,
+.gallery-thumb img,
+.gallery-thumb video {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+
+@media screen and (max-width: 768px) {
+  html, body {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: none;
+  }
+
+  #main-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #image-wrapper {
+    max-height: calc(var(--vh, 1vh) * 100 - 160px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 80px);
+    margin: 20px;
+  }
+
+  #nav {
+    position: fixed !important;
+    bottom: 25px !important;
+    top: auto !important;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background: white;
+    z-index: 1;
+  }
+
+  #index-overlay.active {
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #image-wrapper.index-mode {
+    transform: translateX(0) !important;
+    opacity: 0.5;
+  }
+
+  /* UPDATED: Fixed footer positioning for mobile */
+  #index-overlay.active .index-footer {
+    position: fixed;
+    bottom: 25px; /* Changed from 0 to 25px to raise above Safari controls */
+    left: 0;
+    right: 0;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 1001;
+  }
+
+  /* Adjust photo size to give more room for links */
+  #index-overlay.active .index-footer #index-footer-photo {
+    width: 60px; /* Reduced from 70px */
+    height: 60px; /* Reduced from 70px */
+    flex-shrink: 0;
+  }
+
+  /* Optimize social links display */
+  #index-overlay.active .index-footer .footer-right {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 4px; /* Reduced from 6px */
+    font-size: 9px; /* Slightly smaller font */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 20px; /* Align with album counts */
+  }
+  
+  /* Ensure links are properly spaced */
+  #index-overlay.active .index-footer .footer-right a {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  /* Make separator more compact */
+  #index-overlay.active .index-footer .separator {
+    margin: 0 2px;
+    transform: none;
+  }
+}

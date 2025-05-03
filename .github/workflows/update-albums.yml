@@ -1,0 +1,31 @@
+name: "🔄 Génération Albums JSON"
+
+on:
+  push:
+    paths:
+      - "albums/**"
+      - "scripts/build-albums.js"
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Generate albums.json and order.json
+        run: |
+          node scripts/build-albums.js
+
+      - name: Commit and push updated JSON
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "🔄 Mise à jour automatique de albums.json"
+          file_pattern: |
+            albums.json
+            order.json
