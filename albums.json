@@ -1,15 +1,6 @@
 {
-  "books": {},
-  "projects": {
-    "Costa rica l": [],
-    "Costa rica ll": [],
-    "Costa rica lll": [],
-    "Indonesia l": [],
-    "Indonesia ll": [],
-    "Mauritius": []
-  },
+  "projects": {},
   "work": {
-    "LV SS 24": [],
     "Recent": [
       "/albums/work/Recent/image_001.png",
       "/albums/work/Recent/image_002.png",
@@ -76,8 +67,6 @@
       "/albums/work/Work l/IMG_9794.png",
       "/albums/work/Work l/IMG_9798.png",
       "/albums/work/Work l/IMG_9799.png"
-    ],
-    "Work ll": [],
-    "Work lll": []
+    ]
   }
 }
