@@ -85,18 +85,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // Build primary and secondary album lists
   function buildList(manifestSection, orderList, container, route) {
     const added = new Set();
+
+    // Albums définis dans order.json
     orderList.forEach(slug => {
       const key = Object.keys(manifestSection).find(k =>
-        k.toLowerCase().replace(/\s+/g, '-') === slug.toLowerCase()
+        k.toLowerCase() === slug.toLowerCase()
       );
-      if (!key) return;
+      if (!key) {
+        console.warn(`Album "${slug}" not found in manifest section "${route}"`);
+        return;
+      }
       added.add(key);
       appendItem(container, route, key, manifestSection[key].length);
     });
+
+    // Albums restants, triés alpha
     Object.keys(manifestSection)
       .filter(k => !added.has(k))
       .sort((a, b) => a.localeCompare(b))
-      .forEach(key => appendItem(container, route, key, manifestSection[key].length));
+      .forEach(k => {
+        appendItem(container, route, k, manifestSection[k].length);
+      });
   }
   // Utility: debounce calls to limit rapid-fire events
   function debounce(fn, wait) {
