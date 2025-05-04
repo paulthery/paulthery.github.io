@@ -51,6 +51,8 @@ if (isMobile) {
   }
   // Initialize and recalculate on load and resize/orientation change
   document.addEventListener('DOMContentLoaded', updateCursorMobilePosition);
+  window.addEventListener('load', updateViewportHeight);
+  window.addEventListener('load', updateCursorMobilePosition);
   window.addEventListener('resize', updateCursorMobilePosition);
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', updateCursorMobilePosition);
