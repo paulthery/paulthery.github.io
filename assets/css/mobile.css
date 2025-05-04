@@ -9,7 +9,7 @@
 
 /* Texte d'introduction - position et taille adaptées au mobile */
 #intro-text {
-  left: 20px;
+  left: 40px;
   font-size: 16px; /* Taille ajustée pour une meilleure lisibilité */
   gap: 1em;
 }
@@ -264,7 +264,7 @@ body {
       position: fixed !important;
       left: 50% !important;
       transform: translate(-50%, 0) !important;
-      z-index: 10000 !important;
+      z-index: 3 !important;
       pointer-events: none !important;
       color: black !important;
       mix-blend-mode: normal !important;
