@@ -148,6 +148,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Function to reposition the nav element based on wrapper blank space
   function updateNavPosition() {
+    // === Safe-area insets ===
+    const computedStyle = getComputedStyle(document.documentElement);
+    const safeTop    = parseFloat(computedStyle.getPropertyValue('--safe-top'))    || 0;
+    const safeBottom = parseFloat(computedStyle.getPropertyValue('--safe-bottom')) || 0;
     // If a video is displayed, keep nav fixed at bottom
     if (mainVideo && mainVideo.style.display === 'block') {
       nav.style.position = 'fixed';
@@ -156,10 +160,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const wrapperRect = imageWrapper.getBoundingClientRect();
     // blank space below wrapper
-    const blankBelow = getVH() - wrapperRect.bottom;
+    const blankBelow = (getVH() - safeBottom) - wrapperRect.bottom;
     // center nav in the blank region
     nav.style.position = 'absolute';
     nav.style.top = (wrapperRect.bottom + blankBelow / 2 - nav.offsetHeight / 2) + 'px';
+    // Mobile-only: iOS/Android nav position
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      // Center nav above/below image for mobile
+      const blankAbove = wrapperRect.top - safeTop;
+      const cursorTop  = blankAbove / 2 - (customCursor.offsetHeight / 2);
+      // (existing code may follow here)
+    }
   }
 
   // Set initial background color before animation
@@ -295,6 +306,8 @@ document.addEventListener('DOMContentLoaded', () => {
   customCursor.style.transition = 'color 0.2s ease';
   customCursor.style.mixBlendMode = 'difference';
   customCursor.style.color = 'white';
+  customCursor.style.display = 'none'; // Masquer initialement
+  customCursor.style.opacity = '0'; // Double sécurité avec l'opacité
   document.body.appendChild(customCursor);
 
   // Update cursor position on mouse move
@@ -306,14 +319,33 @@ document.addEventListener('DOMContentLoaded', () => {
       customCursor.style.display = 'none';
       document.body.style.cursor = 'default';
     } else {
-      customCursor.style.display = 'block';
-      document.body.style.cursor = 'none';
+      if (document.body.classList.contains('intro-complete')) {
+        customCursor.style.display = 'block';
+        document.body.style.cursor = 'none';
+      }
     }
   });
 
   // Update the cursor counter display
   function updateCursor() {
-    customCursor.textContent = `${currentIndex + 1}/${totalImages}`;
+    // Récupérer le nom de l'album actuel
+    let albumName = "Recent"; // Valeur par défaut
+    
+    // Extraire le nom d'album depuis l'URL ou utiliser le défaut
+    const albumMatch = location.pathname.match(/\/albums\/([^/]+)\/([^/]+)/);
+    if (albumMatch) {
+      const [, , album] = albumMatch;
+      albumName = decodeURIComponent(album);
+    } else {
+      // Si on est sur la page d'accueil, utiliser l'album par défaut
+      const defaultAlbum = document.querySelector('#gallery-nav span:first-child');
+      if (defaultAlbum && defaultAlbum.textContent) {
+        albumName = defaultAlbum.textContent;
+      }
+    }
+    
+    // Formater le texte du curseur avec le nom de l'album
+    customCursor.textContent = `${albumName} — ${currentIndex + 1}/${totalImages}`;
   }
 
   // Update the main image or video based on current index
@@ -398,6 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContent.style.display = 'flex';
         if (mainImage) mainImage.style.opacity = '1';
         mainContent.classList.add('loaded');
+        document.body.classList.add('intro-complete'); // Marquer l'intro comme terminée
       }
       
       // Image mask animation
@@ -405,6 +438,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (imageMask) {
         imageMask.style.transition = 'transform 0.8s ease';
         imageMask.style.transform = 'translateY(-100%)';
+      }
+      
+      // Afficher le curseur en même temps que la navigation
+      if (customCursor) {
+        customCursor.style.display = 'block';
+        customCursor.style.opacity = '1';
+        
+        // S'assurer que l'état initial est correct
+        updateCursor();
       }
       
       // Update image and nav position
@@ -640,6 +682,8 @@ document.addEventListener('DOMContentLoaded', () => {
         el.loop = true;
         el.autoplay = true;
         el.controls = false;
+        el.setAttribute('playsinline', '');
+        el.setAttribute('webkit-playsinline', '');
         el.playsinline = true;
         container.appendChild(el);
       } else {
@@ -780,6 +824,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Reposition nav after resizing wrapper
     updateNavPosition();
+  }
+  // Prevent duplicate caption injection
+  function updateCaptionClasses() {
+    // Prevent duplicate caption injection
+    if (document.querySelector('.album-title')) return;
+    // ... rest of function ...
   }
   
   // Run on initial load and on resize

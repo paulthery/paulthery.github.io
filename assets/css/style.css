@@ -258,6 +258,13 @@ body {
   transition: color 0.2s ease;
   will-change: transform;
   mix-blend-mode: difference;
+  background-color: transparent;
+}
+
+/* Masquer le curseur pendant l'intro */
+body:not(.intro-complete) #custom-cursor {
+  display: none !important;
+  opacity: 0 !important;
 }
 
 /* Gallery overlay and elements */

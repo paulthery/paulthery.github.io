@@ -11,6 +11,7 @@ if (isMobile) {
     const wrapper = document.getElementById('image-wrapper');
     if (wrapper) {
       wrapper.style.maxHeight = `${vh - 160}px`; // nav 80 px top + bottom
+      updateCursorMobilePosition();
     }
   }
 
@@ -24,110 +25,34 @@ if (isMobile) {
   // Initial run once DOM is ready
   document.addEventListener('DOMContentLoaded', updateViewportHeight);
 
-  // SOLUTION RADICALE: Repositionner complètement le pied de page
-  document.addEventListener('DOMContentLoaded', function() {
-    // Fonction pour manipuler l'injection du footer
-    function modifyIndexFooter() {
-      const indexOverlay = document.getElementById('index-overlay');
-      
-      if (!indexOverlay) return;
-      
-      // Observer les changements sur l'overlay
-      const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          if (mutation.type === 'attributes' && mutation.attributeName === 'class' && 
-              indexOverlay.classList.contains('active')) {
-            
-            // Attendre un court instant que le contenu soit pleinement injecté
-            setTimeout(function() {
-              const footer = indexOverlay.querySelector('.index-footer');
-              
-              if (!footer) return;
-              
-              // Forcer le repositionnement du footer avec des styles inline
-              // Ces styles auront la priorité sur tout autre style CSS
-              footer.style.cssText = `
-                position: fixed !important;
-                bottom: 110px !important;
-                left: 0 !important;
-                right: 0 !important;
-                padding: 0 20px !important;
-                display: flex !important;
-                justify-content: space-between !important;
-                align-items: flex-end !important;
-                z-index: 9999 !important;
-                background-color: white !important;
-                margin: 0 !important;
-              `;
-              
-              // Manipuler la taille de la photo
-              const photo = footer.querySelector('#index-footer-photo');
-              if (photo) {
-                photo.style.cssText = `
-                  width: 45px !important;
-                  height: 45px !important;
-                  flex-shrink: 0 !important;
-                  margin-right: 15px !important;
-                `;
-              }
-              
-              // Manipuler la section des liens
-              const linksSection = footer.querySelector('.footer-right');
-              if (linksSection) {
-                linksSection.style.cssText = `
-                  display: flex !important;
-                  align-items: flex-end !important;
-                  justify-content: flex-end !important;
-                  flex-wrap: nowrap !important;
-                  gap: 0 !important;
-                  font-size: 7.5px !important;
-                  white-space: nowrap !important;
-                  overflow: visible !important;
-                  margin-right: 20px !important;
-                `;
-                
-                // Manipuler chaque lien individuellement
-                const links = linksSection.querySelectorAll('a');
-                links.forEach(function(link) {
-                  link.style.cssText = `
-                    margin: 0 2px !important;
-                    white-space: nowrap !important;
-                    letter-spacing: -0.2px !important;
-                  `;
-                });
-                
-                // Manipuler chaque séparateur
-                const separators = linksSection.querySelectorAll('.separator');
-                separators.forEach(function(separator) {
-                  separator.style.cssText = `
-                    margin: 0 !important;
-                    padding: 0 !important;
-                    transform: none !important;
-                    font-size: 7.5px !important;
-                    position: relative !important;
-                    top: -1px !important;
-                  `;
-                });
-              }
-            }, 50); // Petit délai pour s'assurer que le DOM est prêt
-          }
-        });
-      });
-      
-      // Observer les changements d'attributs de classe
-      observer.observe(indexOverlay, { attributes: true });
-      
-      // S'assurer que le main.js a fini d'injecter le HTML avant d'appliquer nos styles
-      if (indexOverlay.classList.contains('active')) {
-        const footer = indexOverlay.querySelector('.index-footer');
-        if (footer) {
-          // Si l'overlay est déjà actif, appliquer directement nos styles
-          footer.style.bottom = '110px !important';
-        }
-      }
-    }
-    
-    // Attendre un peu que tout soit chargé
-    setTimeout(modifyIndexFooter, 200);
-  });
+  // === DYNAMIC MOBILE CURSOR POSITIONING ===
+  function updateCursorMobilePosition() {
+    const wrapper = document.getElementById('image-wrapper');
+    const cursor = document.getElementById('custom-cursor');
+    if (!wrapper || !cursor) return;
+
+    // Retrieve safe-area insets from CSS variables
+    const computed = getComputedStyle(document.documentElement);
+    const safeTop = parseFloat(computed.getPropertyValue('--safe-top')) || 0;
+    const safeBottom = parseFloat(computed.getPropertyValue('--safe-bottom')) || 0;
+
+    // Compute blank space above and below wrapper, accounting for insets
+    const rect = wrapper.getBoundingClientRect();
+    const blankAbove = rect.top - safeTop;
+    const blankBelow = (window.visualViewport ? window.visualViewport.height : window.innerHeight) - safeBottom - rect.bottom;
+
+    // Center cursor in the blank region above by default
+    const topPos = blankAbove / 2 - (cursor.offsetHeight / 2);
+    cursor.style.position = 'fixed';
+    cursor.style.top = `${topPos}px`;
+    cursor.style.bottom = 'auto';
+    cursor.style.left = '50%';
+    cursor.style.transform = 'translateX(-50%)';
+  }
+  // Initialize and recalculate on load and resize/orientation change
+  document.addEventListener('DOMContentLoaded', updateCursorMobilePosition);
+  window.addEventListener('resize', updateCursorMobilePosition);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', updateCursorMobilePosition);
+  }
 }
