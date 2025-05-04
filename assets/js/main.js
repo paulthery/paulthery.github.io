@@ -455,13 +455,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 800);
   }
 
-  // Set intro text color based on color scheme preference
+  // Force intro text color to white to ensure visibility on dark‑mode devices
   if (introText) {
-    if (prefersDark) {
-      introText.style.color = 'black';
-    } else {
-      introText.style.color = 'white';
-    }
+    introText.style.color = 'white';
   }
 
   // Keyboard navigation
