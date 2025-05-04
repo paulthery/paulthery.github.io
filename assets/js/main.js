@@ -489,6 +489,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* --- Swipe navigation on the main image (mobile devices) --- */
+  if (imageWrapper && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+    let swipeStartX = 0;
+    let swipeStartY = 0;
+    let swipeStartT = 0;
+
+    imageWrapper.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return; // only single‑finger
+      const t = e.touches[0];
+      swipeStartX = t.clientX;
+      swipeStartY = t.clientY;
+      swipeStartT = Date.now();
+    }, { passive: true });
+
+    imageWrapper.addEventListener('touchend', (e) => {
+      const t = e.changedTouches[0];
+      const dx = t.clientX - swipeStartX;
+      const dy = t.clientY - swipeStartY;
+      const dt = Date.now() - swipeStartT;
+
+      const DIST = 50;   // px threshold
+      const TIME = 500;  // ms threshold
+
+      if (
+        dt < TIME &&
+        Math.abs(dx) > DIST &&
+        Math.abs(dx) > Math.abs(dy)
+      ) {
+        if (dx < 0) {
+          // swipe left → next
+          currentIndex = (currentIndex + 1) % totalImages;
+        } else {
+          // swipe right → previous
+          currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        }
+        updateImage();
+      }
+    }, { passive: true });
+  }
+
   // Index overlay functionality
   const indexTrigger = document.getElementById('index-trigger');
   const indexOverlay = document.getElementById('index-overlay');
