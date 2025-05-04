@@ -13,13 +13,13 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
 
-    - name: Install sitemap‑generator
-      run: npm install -g sitemap-generator-cli
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
 
-    - name: Generate sitemap.xml
-      run: |
-        rm -f sitemap.xml
-        sitemap-generator https://paulthery.com -o ./ --strip-querystring
+    - name: Generate sitemap.xml from manifest
+      run: node scripts/build-sitemap.js
 
     - name: Commit & push if changed
       run: |
