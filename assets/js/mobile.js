@@ -57,4 +57,49 @@ if (isMobile) {
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', updateCursorMobilePosition);
   }
+  /* --- Swipe navigation on main image (mobile only) --- */
+  document.addEventListener('DOMContentLoaded', () => {
+    const wrapper = document.getElementById('image-wrapper');
+    if (!wrapper) return;
+
+    let startX = 0;
+    let startY = 0;
+    let startTime = 0;
+
+    wrapper.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return; // single finger only
+      const t = e.touches[0];
+      startX = t.clientX;
+      startY = t.clientY;
+      startTime = Date.now();
+    }, { passive: true });
+
+    wrapper.addEventListener('touchend', (e) => {
+      const t = e.changedTouches[0];
+      const deltaX = t.clientX - startX;
+      const deltaY = t.clientY - startY;
+      const elapsed = Date.now() - startTime;
+
+      const SWIPE_DISTANCE = 50;  // minimum px
+      const SWIPE_TIME = 500;     // max ms for a quick swipe
+
+      // horizontal quick swipe detection
+      if (
+        elapsed < SWIPE_TIME &&
+        Math.abs(deltaX) > SWIPE_DISTANCE &&
+        Math.abs(deltaX) > Math.abs(deltaY)
+      ) {
+        if (typeof currentIndex === 'number' && typeof totalImages === 'number' && typeof updateImage === 'function') {
+          if (deltaX < 0) {
+            // swipe left -> next image
+            currentIndex = (currentIndex + 1) % totalImages;
+          } else {
+            // swipe right -> previous image
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+          }
+          updateImage();
+        }
+      }
+    }, { passive: true });
+  });
 }
