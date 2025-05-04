@@ -308,8 +308,7 @@ body {
   #curtain-overlay {
       background: rgba(255, 255, 255, 0.85) !important; /* Semi-transparent comme desktop */
   }
-  /* Masquer le curseur lorsque l’index ou la galerie est active */
-  #index-overlay.active ~ #custom-cursor,
+  /* Masquer le curseur lorsque la galerie est active */
   #gallery-overlay.active ~ #custom-cursor {
     display: none !important;
   }
