@@ -105,10 +105,6 @@
   padding: 0 20px;
 }
 
-/* Curseur personnalisé désactivé sur mobile */
-#custom-cursor {
-  display: none !important;
-}
 
 body {
   cursor: default !important;
@@ -276,7 +272,6 @@ body {
 
   /* Masquer le curseur pendant l'intro */
   body:not(.intro-complete) #custom-cursor {
-      display: none !important;
       opacity: 0 !important;
   }
 
@@ -311,5 +306,17 @@ body {
   /* Masquer le curseur lorsque la galerie est active */
   #gallery-overlay.active ~ #custom-cursor {
     display: none !important;
+  }
+  /* Hide main navigation until intro is complete */
+  body:not(.intro-complete) #nav {
+      opacity: 0 !important;
+      visibility: hidden !important;
+  }
+
+  /* Show navigation when intro is done */
+  body.intro-complete #nav {
+      display: flex !important;
+      opacity: 1 !important;
+      visibility: visible !important;
   }
 }
