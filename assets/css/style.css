@@ -512,3 +512,10 @@ a:focus, button:focus, [tabindex]:focus {
   outline: 2px solid #888;
   outline-offset: 2px;
 }
+
+/* Ajouté : retire le contour après clic souris, mais le garde au clavier */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+[tabindex]:focus:not(:focus-visible) {
+  outline: none;
+}
