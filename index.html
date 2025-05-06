@@ -33,6 +33,9 @@
   <meta name="msapplication-TileColor" content="#000000">
   <meta name="msapplication-TileImage" content="mstile-144x144.png">
   
+  <!-- Preload first image -->
+  <link rel="preload" as="image" href="/albums/work/Recent/image_001.png">
+
   <!-- Chargement conditionnel du JS mobile -->
   <script>
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 
@@ -55,32 +58,36 @@
     <span class="light">Photographer</span>
   </div>
 
-  <div id="main-content">
-    <div id="image-wrapper">
-      <div id="reveal-mask"></div>
-      <img id="main-image" src="/albums/work/Recent/image_001.png" alt="Image principale">
-      <video id="main-video" style="display: none;" muted loop autoplay playsinline webkit-playsinline></video>
-      <div id="image-mask"></div>
+  <div id="main-content" role="main">
+    <div id="image-wrapper" role="region" aria-label="Image slideshow">
+      <div id="reveal-mask" role="presentation"></div>
+      <img id="main-image" src="/albums/work/Recent/image_001.png" alt="Featured photography work by Paul Thery" aria-live="polite">
+      <video id="main-video" style="display: none;" muted loop autoplay playsinline webkit-playsinline title="Featured video work" aria-label="Featured video work"></video>
+      <div id="image-mask" role="presentation"></div>
     </div>
-    <nav id="nav">
-      <a href="#" id="index-trigger">Index</a><span class="separator"> — </span><a href="#" data-gallery>Gallery</a>
+    <nav id="nav" aria-label="Main navigation">
+      <a href="#" id="index-trigger" aria-label="Open work index">Index</a>
+      <span class="separator" aria-hidden="true"> — </span>
+      <a href="#" data-gallery aria-label="Open gallery view">Gallery</a>
     </nav>
   </div>
 
-  <div id="gallery-overlay">
-    <div id="gallery-top-mask"></div>
-    <div id="gallery-bottom-mask"></div>
-    <div id="gallery-nav">
-      <span>Recent</span><span class="separator"> — </span><span id="close-gallery">Close</span>
+  <div id="gallery-overlay" role="dialog" aria-label="Gallery view" aria-modal="true">
+    <div id="gallery-top-mask" role="presentation"></div>
+    <div id="gallery-bottom-mask" role="presentation"></div>
+    <div id="gallery-nav" role="navigation" aria-label="Gallery navigation">
+      <span>Recent</span>
+      <span class="separator" aria-hidden="true"> — </span>
+      <span id="close-gallery" role="button" tabindex="0" aria-label="Close gallery">Close</span>
     </div>
     <div id="gallery-scroll">
-      <div id="gallery-grid"></div>
+      <div id="gallery-grid" role="grid" aria-label="Gallery grid"></div>
     </div>
   </div>
 
-  <div id="index-overlay">
-    <div id="index-mask"></div>
-    <div id="index-content"></div>
+  <div id="index-overlay" role="dialog" aria-label="Work index" aria-modal="true">
+    <div id="index-mask" role="presentation"></div>
+    <div id="index-content" role="navigation" aria-label="Album navigation"></div>
   </div>
 
   <script src="/assets/js/main.js" defer></script>

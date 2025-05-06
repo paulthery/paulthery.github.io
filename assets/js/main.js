@@ -65,6 +65,11 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
+// Gestion globale des erreurs JS
+window.addEventListener('unhandledrejection', function(event) {
+  console.error('Unhandled promise rejection:', event.reason);
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   // Initialisation du cache média
   const mediaCache = new MediaCacheManager();
@@ -376,6 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
         vidEl.onerror = e => console.error(e);
         vidEl.onloadeddata = () => vidEl.play().catch(console.error);
       }
+      imgEl.removeAttribute('alt');
     } else {
       vidEl.pause();
       vidEl.removeAttribute('src');
@@ -391,10 +397,14 @@ document.addEventListener('DOMContentLoaded', () => {
         imgEl.style.display = 'block';
         imgEl.src = src;
       }
+      // Ajout d'un alt dynamique pour l'accessibilité
+      imgEl.alt = `Image ${currentIndex + 1} sur ${totalImages} de l’album`;
     }
 
     updateCursor();
     updateNavPosition();
+    // Ajout d'un titre dynamique à la page
+    document.title = `Paul Thery — ${customCursor.textContent}`;
   }
 
   // Animation to transition from intro to main content

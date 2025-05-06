@@ -33,6 +33,11 @@
   margin: 0 0.4em;
 }
 
+/* Contraste amélioré pour les liens sur mobile */
+#nav a, #gallery-nav span, #gallery-nav a {
+  color: #111 !important;
+}
+
 /* Wrapper d'image - proportions optimisées pour mobile */
 #image-wrapper {
   max-height: calc(var(--vh, 1vh) * 100 - var(--margin-vh-offset));
@@ -148,6 +153,11 @@ body {
   -webkit-backface-visibility: hidden;
 }
 
+/* Focus visible pour accessibilité */
+a:focus, button:focus, [tabindex]:focus {
+  outline: 2px solid #888;
+  outline-offset: 2px;
+}
 
 @media screen and (max-width: 768px) {
   html, body {
