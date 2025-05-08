@@ -201,8 +201,8 @@ a:focus, button:focus, [tabindex]:focus {
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      padding: 20px 20px 100px 20px; /* Espace pour le footer fixe */
-      height: calc(100% - 80px); /* Hauteur restante moins le footer */
+      padding: 20px 20px 100px 20px;
+      height: calc(100% - 80px);
   }
 
   #index-overlay.active .index-header {
@@ -217,28 +217,28 @@ a:focus, button:focus, [tabindex]:focus {
 
   #index-overlay.active .index-footer {
     position: fixed;
-    bottom: 25px;      /* même valeur que le nav */
+    bottom: calc(var(--nav-gap) + var(--nav-height)) !important;
     left: 20px;
     right: 20px;
-    height: 80px;      /* même hauteur que le nav */
-    background: white;  /* fond blanc comme le nav */
-    z-index: 1000;     /* au-dessus du contenu scrollable */
+    height: 80px;
+    background: white;
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   #index-overlay.active .index-footer #index-footer-photo {
-    width: 65px;       /* taille réduite pour s'aligner */
+    width: 65px;
     height: 65px;
     margin: 0;
   }
 
   #index-overlay.active .index-footer .footer-right {
     display: flex;
-    gap: 12px;        /* espacement uniforme */
+    gap: 12px;
     align-items: center;
-    font-size: 12px;  /* même taille que la nav */
+    font-size: 12px;
   }
 
   #index-overlay.active .index-footer .footer-right a {
@@ -247,7 +247,7 @@ a:focus, button:focus, [tabindex]:focus {
   }
 
   #index-overlay.active #index-content {
-    padding-bottom: 120px;  /* espace pour le footer fixe */
+    padding-bottom: 120px;
   }
 
   #index-overlay.active #index-content {
@@ -260,7 +260,7 @@ a:focus, button:focus, [tabindex]:focus {
   #index-overlay.active .index-footer #index-footer-photo {
     width: 50px;
     height: 50px;
-    margin: 0;       /* on suit directement le left:20px du footer */
+    margin: 0;
   }
 
   #index-overlay.active .index-footer .footer-right {
@@ -294,14 +294,14 @@ a:focus, button:focus, [tabindex]:focus {
 
   #image-wrapper.index-mode {
       transform: translateX(0) !important;
-      z-index: 0; /* Ajout du z-index */
+      z-index: 0;
   }
 
   #index-overlay.active #index-content {
       display: flex;
       flex-direction: column;
       min-height: 100%;
-      padding-bottom: 120px; /* Espace pour le footer */
+      padding-bottom: 120px;
       box-sizing: border-box;
   }
 
@@ -336,108 +336,27 @@ a:focus, button:focus, [tabindex]:focus {
       margin: 0 2px;
       transform: none;
   }
-}
 
-@media screen and (max-width: 768px) {
-  #custom-cursor {
-      display: block !important;
-      position: fixed !important;
-      left: 50% !important;
-      transform: translate(-50%, 0) !important;
-      z-index: 3 !important;
-      pointer-events: none !important;
-      color: black !important;
-      mix-blend-mode: normal !important;
-      background-color: transparent !important;
-      padding: 3px 6px !important;
-      font-size: 11px !important;
-      white-space: nowrap !important;
+  :root {
+    --footer-gap: calc(25px + env(safe-area-inset-bottom, 0px));
+    --nav-gap: 25px;
+    --nav-height: 80px;
   }
 
-  body:not(.intro-complete) #custom-cursor {
-      opacity: 0 !important;
+  #index-overlay.active .index-footer {
+    align-items: flex-end;
+    bottom: calc(var(--nav-gap) + var(--nav-height)) !important;
   }
 
-  #gallery-nav {
-      position: fixed !important;
-      bottom: 25px !important;
-      left: 0 !important;
-      width: 100% !important;
-      height: 80px !important;
-      line-height: 80px !important;
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-      background: white !important;
-      z-index: 1001 !important;
+  #index-overlay.active #index-footer-photo {
+    width: 75px;
+    height: 75px;
+    margin-left: 20px;
+    align-self: flex-end;
+    flex-shrink: 0;
   }
 
-  #gallery-overlay {
-      background: transparent !important;
+  #index-overlay.active #index-content {
+    padding-bottom: calc(80px + var(--footer-gap));
   }
-  
-  #gallery-overlay.active {
-      transform: translateY(0) !important;
-      z-index: 1002 !important;
-  }
-  
-  #curtain-overlay {
-      background: rgba(255, 255, 255, 0.85) !important;
-  }
-  #gallery-overlay.active ~ #custom-cursor {
-    display: none !important;
-  }
-  body:not(.intro-complete) #nav {
-      opacity: 0 !important;
-      visibility: hidden !important;
-  }
-
-  body.intro-complete #nav {
-      display: flex !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-  }
-  /* --- Alignement footer & photo (mobile index) ---------------------------- */
-#index-overlay.active .index-footer {
-    align-items: flex-end;          /* bas de la photo et des liens alignés */
-}
-
-#index-overlay.active #index-footer-photo {
-    margin-left: 20px;              /* même marge que les titres d’albums */
-    align-self: flex-end;           /* bottom flush */
-}
-/* --- Taille agrandie de la photo (footer mobile) ----------------------- */
-#index-overlay.active .index-footer #index-footer-photo {
-  width: 75px;      /* ↗ ajuste à la valeur qui te plaît : 70-90 px */
-  height: 75px;
-  flex-shrink: 0;   /* empêche la photo de se réduire si l’espace manque */
-}
-/* -------------------------------------------------------------- */
-/* Espacement cohérent en bas (mobile index)                      */
-/* -------------------------------------------------------------- */
-:root {
-  --footer-gap: calc(25px + env(safe-area-inset-bottom, 0px));
-  /* 25 px = valeur déjà utilisée par #nav ; on ajoute le safe-area si présent */
-}
-
-/* 1. Le footer (photo + liens) remonte du même gap que #nav */
-#index-overlay.active .index-footer {
-  bottom: var(--footer-gap);
-}
-
-/* 2. Le contenu scrollable laisse la place au footer + au gap */
-#index-overlay.active #index-content {
-  padding-bottom: calc(80px + var(--footer-gap));
-  /* 80 px = hauteur du footer ; on y ajoute le même espace */
-}
-/* ---------- Footer collé EXACTEMENT sur le haut de la nav -------------- */
-:root {
-  --nav-gap: 25px;   /* distance entre le bas de la nav et le bas écran */
-  --nav-height: 80px;/* hauteur fixe de la nav (Index-Gallery-Close)    */
-}
-
-#index-overlay.active .index-footer {
-  bottom: calc(var(--nav-gap) + var(--nav-height)) !important;
-  /* 25 px + 80 px = 105 px  → le bas photo/liens affleure le haut de la nav */
-}
 }
