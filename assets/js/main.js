@@ -82,9 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function buildList(manifestSection, orderList, container, route) {
+    if (!manifestSection || !orderList || !container) {
+      console.warn('buildList: manifestSection, orderList ou container manquant', {manifestSection, orderList, container, route});
+      return;
+    }
     const added = new Set();
 
     orderList.forEach(slug => {
+      if (!manifestSection) return;
       const key = Object.keys(manifestSection).find(k =>
         k.toLowerCase() === slug.toLowerCase()
       );
@@ -96,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
       appendItem(container, route, key, manifestSection[key].length);
     });
 
+    if (!manifestSection) return;
     Object.keys(manifestSection)
       .filter(k => !added.has(k))
       .sort((a, b) => a.localeCompare(b))
@@ -103,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         appendItem(container, route, k, manifestSection[k].length);
       });
   }
+
   function debounce(fn, wait) {
     let timeout;
     return function(...args) {
@@ -176,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let totalImages = 0;
   let galleryImages = [];
 
-  // Ajout de variables globales pour le manifest, order et l’album courant
   let manifestData, orderData;
   let currentCategory = 'work';
   let currentAlbumKey = '';
@@ -191,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function nextAlbum() {
-    // Vérifier que orderData et manifestData sont définis
     if (!orderData || !manifestData) return;
     const albumOrder = orderData[currentCategory];
     const currentIdx = albumOrder.findIndex(name => name.toLowerCase() === currentAlbumKey.toLowerCase());
@@ -201,22 +206,25 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (currentIdx < albumOrder.length - 1) {
       nextAlbumKey = albumOrder[currentIdx + 1];
     } else {
-      nextAlbumKey = albumOrder[0]; // reboucler sur le premier album
+      nextAlbumKey = albumOrder[0];
     }
     const files = (manifestData[currentCategory] && manifestData[currentCategory][nextAlbumKey]) || [];
-    if (files.length === 0) return; // ne rien faire si pas de fichiers
+    if (files.length === 0) return;
     currentAlbumKey = nextAlbumKey;
-    // Mettre à jour l'URL pour refléter l'album suivant
     history.pushState(null, '', `/albums/${currentCategory}/${encodeURIComponent(nextAlbumKey)}`);
     finishLoad(files);
   }
 
   function preloadAllMedia() {
     manifestPromise.then(manifest => {
+      if (!manifest || !manifest.work || !manifest.projects || !manifest.books) {
+        console.warn('preloadAllMedia: manifest incomplet', manifest);
+        return;
+      }
       const allFiles = [
-        ...Object.values(manifest.work).flat(),
-        ...Object.values(manifest.projects).flat(),
-        ...Object.values(manifest.books).flat()
+        ...Object.values(manifest.work || {}).flat(),
+        ...Object.values(manifest.projects || {}).flat(),
+        ...Object.values(manifest.books || {}).flat()
       ];
       
       if (images.length > 0) {
@@ -239,11 +247,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const [, category, album] = albumMatch;
       currentCategory = category;
       currentAlbumKey = album;
-      files = manifest[currentCategory]?.[currentAlbumKey] || [];
+      files = manifest && manifest[currentCategory] && manifest[currentCategory][currentAlbumKey] ? manifest[currentCategory][currentAlbumKey] : [];
     } else {
-      const defaultKey = Object.keys(manifest.work).find(k => k.toLowerCase() === 'recent');
+      const defaultKey = manifest && manifest.work ? Object.keys(manifest.work).find(k => k.toLowerCase() === 'recent') : undefined;
       currentAlbumKey = defaultKey;
-      files = manifest.work[defaultKey] || [];
+      files = (manifest && manifest.work && defaultKey) ? manifest.work[defaultKey] : [];
     }
     finishLoad(files);
   });
@@ -540,7 +548,6 @@ document.addEventListener('DOMContentLoaded', () => {
         buildList(manifest.books,    order.books,    listSecondary, 'books');
 
         indexOverlay.classList.add('active');
-        // On mobile: align index-content top padding to the visual cursor position
         if (window.innerWidth <= 768) {
           const cursor = document.getElementById('custom-cursor');
           if (cursor) {
@@ -568,16 +575,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeIndexOverlay() {
       if (indexContent) {
         indexContent.style.transform = 'translateX(100%)';
-        indexContent.style.transitionDelay = '0s'; // Reset transition delay
+        indexContent.style.transitionDelay = '0s';
       }
       imageWrapper.classList.remove('index-mode');
       imageWrapper.style.transform = '';
       setTimeout(() => {
         indexOverlay.classList.remove('active');
         indexContent.innerHTML = '';
-        indexContent.style.transform = ''; // Réinitialiser la position
-      }, 800); // Delay to match the CSS transition
-      hasEnteredRight = false; // Réinitialiser l'état
+        indexContent.style.transform = '';
+      }, 800);
+      hasEnteredRight = false;
     }
 
     document.addEventListener('keydown', e => {
@@ -815,7 +822,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 100));
 
-  // Empêcher le drag & drop et la sélection sur l'image principale
   if (mainImage) {
     mainImage.setAttribute('draggable', 'false');
     mainImage.addEventListener('dragstart', e => e.preventDefault());
