@@ -17,6 +17,7 @@
   <meta name="twitter:image" content="https://paulthery.com/assets/cover.jpg">
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/assets/css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="/assets/css/tablet.css" media="screen and (min-width: 768px) and (max-width: 1024px)">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -33,6 +34,10 @@
         mobileScript.src = '/assets/js/mobile.js';
         mobileScript.defer = true;
         document.head.appendChild(mobileScript);
+        const tabletScript = document.createElement('script');
+        tabletScript.src = '/assets/js/tablet.js';
+        tabletScript.defer = true;
+        document.head.appendChild(tabletScript);
     }
   </script>
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
