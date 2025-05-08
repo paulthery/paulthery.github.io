@@ -204,9 +204,9 @@ a:focus, button:focus, [tabindex]:focus {
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      /* Ajuste le padding supérieur pour égaliser l'espace avec le bas */
-      padding: calc(var(--nav-gap) + (var(--nav-height) / 2)) 20px 100px 20px;
+      padding: calc(var(--nav-gap) + (var(--nav-height) / 2) - 10px) 20px 100px 20px;
       height: calc(100% - 80px);
+      transition: transform 0.6s cubic-bezier(0.42, 0, 0.58, 1);
   }
 
   #index-overlay.active .index-header {
@@ -221,7 +221,7 @@ a:focus, button:focus, [tabindex]:focus {
 
   #index-overlay.active .index-footer {
     position: fixed;
-    bottom: calc(var(--nav-gap) + (var(--nav-height) / 2)) !important;
+    bottom: calc(var(--nav-gap) + (var(--nav-height) / 2) - 10px) !important;
     left: 20px;
     right: 20px;
     height: 80px;
@@ -239,7 +239,6 @@ a:focus, button:focus, [tabindex]:focus {
     flex-shrink: 0;
   }
 
-  /* Fusion des deux déclarations avec la taille de police à 12px */
   #index-overlay.active .index-footer .footer-right {
     display: flex;
     align-items: flex-end;
@@ -277,8 +276,7 @@ a:focus, button:focus, [tabindex]:focus {
     display: flex;
     flex-direction: column;
     min-height: 100%;
-    /* Garde la même formule pour le padding bottom et top */
-    padding-top: calc(var(--nav-gap) + (var(--nav-height) / 2));
+    padding-top: calc(var(--nav-gap) + (var(--nav-height) / 2) - 10px);
     padding-bottom: calc(80px + var(--nav-height) / 2 + var(--nav-gap));
     box-sizing: border-box;
   }
