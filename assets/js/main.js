@@ -528,8 +528,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <a href="mailto:studio@paulthery.com">Contact</a><span class="separator"> — </span>
       <a href="https://instagram.com/paulthery" target="_blank">Instagram</a><span class="separator"> — </span>
       <a href="https://vimeo.com/paulthery" target="_blank">Vimeo</a><span class="separator"> — </span>
-      <a href="https://linkedin.com/in/paulthery" target="_blank">LinkedIn</a><span class="separator"> — </span>
-      <a href="/newsletter" target="_blank">Newsletter</a>
+      <a href="https://linkedin.com/in/paulthery" target="_blank">LinkedIn</a> </span>
     </div>
   </div>
         `;
