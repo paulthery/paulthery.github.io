@@ -4,24 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Paul Thery</title>
-
-  <!-- SEO meta -->
   <link rel="canonical" href="https://paulthery.com/">
   <meta name="description" content="Paul Thery — photographer & art director based in Paris. Portfolio of personal and commissioned work.">
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://paulthery.com/">
   <meta property="og:title" content="Paul Thery — Photographer & Art Director">
   <meta property="og:description" content="Explore the latest photographic and filmmaking projects by Paul Thery.">
   <meta property="og:image" content="https://paulthery.com/assets/cover.jpg">
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Paul Thery — Photographer & Art Director">
   <meta name="twitter:description" content="Explore the latest photographic and filmmaking projects by Paul Thery.">
   <meta name="twitter:image" content="https://paulthery.com/assets/cover.jpg">
-
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/assets/css/mobile.css" media="screen and (max-width: 768px)">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -32,11 +25,7 @@
   <meta name="theme-color" content="#000000">
   <meta name="msapplication-TileColor" content="#000000">
   <meta name="msapplication-TileImage" content="mstile-144x144.png">
-  
-  <!-- Preload first image -->
   <link rel="preload" as="image" href="/albums/work/Recent/image_001.png">
-
-  <!-- Chargement conditionnel du JS mobile -->
   <script>
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 
         (navigator.maxTouchPoints && navigator.maxTouchPoints > 2)) {
@@ -46,10 +35,8 @@
         document.head.appendChild(mobileScript);
     }
   </script>
-  <!-- Cloudflare Web Analytics -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon='{"token": "0c5e46ddbf3d4a2d981ac429d2e49dc9"}'></script>
-  <!-- End Cloudflare Web Analytics -->
 </head>
 <body>
   <div id="curtain-overlay"></div>
@@ -57,7 +44,6 @@
     <span class="regular">Paul Thery</span>
     <span class="light">Photographer</span>
   </div>
-
   <div id="main-content" role="main">
     <div id="image-wrapper" role="region" aria-label="Image slideshow">
       <div id="reveal-mask" role="presentation"></div>
@@ -71,7 +57,6 @@
       <a href="#" data-gallery aria-label="Open gallery view">Gallery</a>
     </nav>
   </div>
-
   <div id="gallery-overlay" role="dialog" aria-label="Gallery view" aria-modal="true">
     <div id="gallery-top-mask" role="presentation"></div>
     <div id="gallery-bottom-mask" role="presentation"></div>
@@ -84,12 +69,10 @@
       <div id="gallery-grid" role="grid" aria-label="Gallery grid"></div>
     </div>
   </div>
-
   <div id="index-overlay" role="dialog" aria-label="Work index" aria-modal="true">
     <div id="index-mask" role="presentation"></div>
     <div id="index-content" role="navigation" aria-label="Album navigation"></div>
   </div>
-
   <script src="/assets/js/main.js" defer></script>
 </body>
 </html>

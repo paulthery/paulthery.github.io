@@ -1,16 +1,12 @@
-/* === STYLE MOBILE UNIQUEMENT === */
-
-/* Variables redéfinies pour mobile */
 :root {
   --margin-vh-offset: 110px;
   --safe-top: env(safe-area-inset-top);
   --safe-bottom: env(safe-area-inset-bottom);
 }
 
-/* Texte d'introduction - position et taille adaptées au mobile */
 #intro-text {
   left: 40px;
-  font-size: 16px; /* Taille ajustée pour une meilleure lisibilité */
+  font-size: 16px;
   gap: 1em;
 }
 
@@ -22,7 +18,6 @@
   margin-right: 30px;
 }
 
-/* Navigation principale */
 #nav {
   font-size: 40px;
   height: 80px;
@@ -33,17 +28,14 @@
   margin: 0 0.4em;
 }
 
-/* Contraste amélioré pour les liens sur mobile */
 #nav a, #gallery-nav span, #gallery-nav a {
   color: #111 !important;
 }
 
-/* Wrapper d'image - proportions optimisées pour mobile */
 #image-wrapper {
   max-height: calc(var(--vh, 1vh) * 100 - var(--margin-vh-offset));
 }
 
-/* SOLUTION 1: Déplacer le padding au conteneur parent */
 #gallery-scroll {
   position: absolute;
   top: 110px;
@@ -58,14 +50,13 @@
   box-sizing: border-box !important;
 }
 
-/* Galerie - grille réduite pour mobile avec 5 colonnes */
 #gallery-grid {
   display: grid !important;
   grid-template-columns: repeat(5, 1fr) !important;
   column-gap: 5px !important;
   row-gap: 25px !important;
   width: 100% !important;
-  padding: 0 !important; /* Suppression du padding ici */
+  padding: 0 !important;
   box-sizing: border-box !important;
 }
 
@@ -84,14 +75,12 @@
   object-fit: contain !important;
 }
 
-/* Navigation de galerie */
 #gallery-nav {
   font-size: 14px;
   height: 80px;
   line-height: 80px;
 }
 
-/* Index overlay - ajustements de layout */
 #index-content {
   width: 100%;
   padding-top: 80px;
@@ -110,12 +99,10 @@
   padding: 0 20px;
 }
 
-
 body {
   cursor: default !important;
 }
 
-/* Ajustements pour les très petits écrans */
 @media (max-width: 480px) {
   #nav,
   #gallery-nav {
@@ -139,12 +126,10 @@ body {
   }
 }
 
-/* Assurer que les transitions restent fluides sur mobile */
 *, *::before, *::after {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Optimisation des performances pour mobile */
 #main-image,
 #main-video,
 .gallery-thumb img,
@@ -153,7 +138,6 @@ body {
   -webkit-backface-visibility: hidden;
 }
 
-/* Focus visible pour accessibilité */
 a:focus, button:focus, [tabindex]:focus {
   outline: 2px solid #888;
   outline-offset: 2px;
@@ -201,70 +185,141 @@ a:focus, button:focus, [tabindex]:focus {
 
   #index-overlay.active {
       width: 100vw;
-      height: calc(var(--vh, 1vh) * 100);
+      height: 100%;
       position: fixed;
       top: 0;
       left: 0;
       z-index: 999;
+      display: flex;
+      flex-direction: column;
+      background: transparent;
+  }
+
+  #index-overlay.active #index-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
       overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      padding: 20px 20px 100px 20px; /* Espace pour le footer fixe */
+      height: calc(100% - 80px); /* Hauteur restante moins le footer */
+  }
+
+  #index-overlay.active .index-header {
+      padding: 0;
+      margin-bottom: 2em;
+  }
+
+  #index-overlay.active .albums-list {
+      padding: 0;
+      margin-bottom: 20px;
+  }
+
+  #index-overlay.active .index-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: auto;
+      padding: 20px;
+      background: transparent;
+      box-shadow: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  #index-overlay.active #index-content {
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 20px 20px 100px 20px;
+  }
+
+  #index-overlay.active .index-footer #index-footer-photo {
+      width: 50px;
+      height: 50px;
+      margin: 0;
+      margin-left: 20px;
+  }
+
+  #index-overlay.active .index-footer .footer-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      font-size: 11px;
+      margin-right: 20px;
+      padding: 0;
+  }
+
+  #index-overlay.active .index-footer .footer-right a {
+      color: black;
+      text-decoration: none;
+      margin: 0;
+      white-space: nowrap;
+  }
+
+  #index-overlay.active .index-footer .separator {
+      margin: 0 4px;
+      opacity: 0.5;
+  }
+
+  #index-overlay.active .index-footer .footer-right {
+      flex: unset;
+      flex-wrap: nowrap;
+      text-overflow: unset;
+      background: none;
   }
 
   #image-wrapper.index-mode {
       transform: translateX(0) !important;
       opacity: 0.5;
+      z-index: 0; /* Ajout du z-index */
   }
 
-  /* UPDATED: Fixed footer positioning for mobile */
-  #index-overlay.active .index-footer {
-      position: fixed;
-      bottom: 25px; /* Changed from 0 to 25px to raise above Safari controls */
-      left: 0;
-      right: 0;
-      padding: 0 20px;
+  #index-overlay.active #index-content {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      z-index: 1001;
+      flex-direction: column;
+      min-height: 100%;
+      padding-bottom: 120px; /* Espace pour le footer */
+      box-sizing: border-box;
   }
 
-  /* Adjust photo size to give more room for links */
-  #index-overlay.active .index-footer #index-footer-photo {
-      width: 60px; /* Reduced from 70px */
-      height: 60px; /* Reduced from 70px */
+  #index-overlay.active .albums-list {
+      margin-bottom: 20px;
+  }
+
+  #index-overlay.active .index-footer .index-footer-photo {
+      width: 60px;
+      height: 60px;
       flex-shrink: 0;
   }
 
-  /* Optimize social links display */
   #index-overlay.active .index-footer .footer-right {
       display: flex;
       align-items: flex-end;
       justify-content: flex-end;
       flex-wrap: nowrap;
-      gap: 4px; /* Reduced from 6px */
-      font-size: 9px; /* Slightly smaller font */
+      gap: 4px;
+      font-size: 9px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      margin-right: 20px; /* Align with album counts */
+      margin-right: 20px;
   }
 
-  /* Ensure links are properly spaced */
   #index-overlay.active .index-footer .footer-right a {
       margin: 0;
       white-space: nowrap;
   }
 
-  /* Make separator more compact */
   #index-overlay.active .index-footer .separator {
       margin: 0 2px;
       transform: none;
   }
 }
 
-/* === FIX MOBILE : curseur, bandeau galerie, overlay vidéo, grille 5 colonnes === */
 @media screen and (max-width: 768px) {
-  /* 1. Afficher et positionner le curseur (#custom-cursor) */
   #custom-cursor {
       display: block !important;
       position: fixed !important;
@@ -274,18 +329,16 @@ a:focus, button:focus, [tabindex]:focus {
       pointer-events: none !important;
       color: black !important;
       mix-blend-mode: normal !important;
-      background-color: transparent !important; /* Pas de fond */
+      background-color: transparent !important;
       padding: 3px 6px !important;
       font-size: 11px !important;
       white-space: nowrap !important;
   }
 
-  /* Masquer le curseur pendant l'intro */
   body:not(.intro-complete) #custom-cursor {
       opacity: 0 !important;
   }
 
-  /* 2. Aligner le bandeau de la galerie (#gallery-nav) comme le nav principal */
   #gallery-nav {
       position: fixed !important;
       bottom: 25px !important;
@@ -300,9 +353,8 @@ a:focus, button:focus, [tabindex]:focus {
       z-index: 1001 !important;
   }
 
-  /* 3. Restaurer la semi-transparence du curtain overlay */
   #gallery-overlay {
-      background: transparent !important; /* Rendre l'overlay transparent */
+      background: transparent !important;
   }
   
   #gallery-overlay.active {
@@ -311,19 +363,16 @@ a:focus, button:focus, [tabindex]:focus {
   }
   
   #curtain-overlay {
-      background: rgba(255, 255, 255, 0.85) !important; /* Semi-transparent comme desktop */
+      background: rgba(255, 255, 255, 0.85) !important;
   }
-  /* Masquer le curseur lorsque la galerie est active */
   #gallery-overlay.active ~ #custom-cursor {
     display: none !important;
   }
-  /* Hide main navigation until intro is complete */
   body:not(.intro-complete) #nav {
       opacity: 0 !important;
       visibility: hidden !important;
   }
 
-  /* Show navigation when intro is done */
   body.intro-complete #nav {
       display: flex !important;
       opacity: 1 !important;

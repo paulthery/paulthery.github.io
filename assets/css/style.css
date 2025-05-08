@@ -1,4 +1,3 @@
-/* Box-sizing reset and base styles */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -27,7 +26,6 @@ body {
   letter-spacing: 0;
 }
 
-/* Font definitions */
 @font-face {
   font-family: "Untitled Sans";
   src: url("/assets/fonts/Untitled Sans Regular.woff2") format("woff2");
@@ -52,7 +50,6 @@ body {
   font-display: swap;
 }
 
-/* Text styling */
 .medium {
   font-weight: 600;
   opacity: 0;
@@ -76,7 +73,6 @@ body {
   animation-fill-mode: forwards;
 }
 
-/* Shared styles */
 #nav .separator,
 #gallery-nav .separator {
   color: black;
@@ -86,7 +82,6 @@ body {
   margin: 0 0.4em;
 }
 
-/* Intro animation elements */
 #intro-text {
   position: absolute;
   top: 50%;
@@ -113,7 +108,6 @@ body {
   transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-/* Main content and image display */
 #main-content {
   display: flex;
   justify-content: center;
@@ -134,13 +128,18 @@ body {
   margin: 0 auto;
   z-index: 1;
   max-height: calc(var(--vh, 1vh) * 100 - var(--margin-vh-offset));
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 #image-wrapper.index-mode {
   transform: translateX(-25%);
+  opacity: 0.5;
+  z-index: 0; /* Ajout du z-index */
 }
 
-/* Image masks and overlays */
 #reveal-mask {
   position: absolute;
   top: 0;
@@ -177,15 +176,17 @@ body {
   transition: background 1.2s ease;
 }
 
-/* Image and video display */
 #main-image {
   max-height: 100%;
   height: 100%;
   width: auto;
   object-fit: contain;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
-/* Navigation elements */
 #nav {
   position: fixed;
   bottom: 0 !important;
@@ -248,7 +249,6 @@ body {
   cursor: pointer;
 }
 
-/* Custom cursor */
 #custom-cursor {
   position: fixed;
   top: 0;
@@ -265,13 +265,11 @@ body {
   background-color: transparent;
 }
 
-/* Masquer le curseur pendant l'intro */
 body:not(.intro-complete) #custom-cursor {
   display: none !important;
   opacity: 0 !important;
 }
 
-/* Gallery overlay and elements */
 #gallery-overlay {
   position: fixed;
   top: 0;
@@ -338,7 +336,6 @@ body:not(.intro-complete) #custom-cursor {
   display: block;
 }
 
-/* Overlays */
 #curtain-overlay {
   position: fixed;
   top: 0;
@@ -371,7 +368,6 @@ body:not(.intro-complete) #custom-cursor {
   background: rgba(0, 0, 0, 0.8);
 }
 
-/* Index content */
 #index-content {
   position: absolute;
   top: 0;
@@ -380,7 +376,7 @@ body:not(.intro-complete) #custom-cursor {
   height: 100%;
   background: white;
   transform: translateX(100%);
-  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); /* Réduire la durée de la transition */
   z-index: 4;
 }
 
@@ -388,9 +384,9 @@ body:not(.intro-complete) #custom-cursor {
   transform: translateX(0);
   padding-top: 100px;
   color: black;
+  transition-delay: 0.2s; /* Ajouter un délai d'apparition */
 }
 
-/* Index elements */
 #index-overlay.active .index-header {
   padding: 0 50px;
   margin-bottom: 3em;
@@ -428,7 +424,6 @@ body:not(.intro-complete) #custom-cursor {
   color: #666;
 }
 
-/* Index footer */
 #index-overlay.active .index-footer {
   position: absolute;
   bottom: 100px;
@@ -463,7 +458,6 @@ body:not(.intro-complete) #custom-cursor {
   margin: 0 10px;
 }
 
-/* Animations */
 @keyframes glideUp {
   from {
     transform: translateY(0);
@@ -482,7 +476,6 @@ body:not(.intro-complete) #custom-cursor {
   }
 }
 
-/* Prevent selection artifacts in gallery view */
 #gallery-overlay,
 #gallery-overlay * {
   -webkit-user-select: none !important;
@@ -491,29 +484,29 @@ body:not(.intro-complete) #custom-cursor {
   user-select: none !important;
 }
 
-/* Hide fullscreen buttons in gallery */
 .gallery-thumb .fs-button {
   display: none;
 }
 
-/* Main video styling */
 #main-video {
   object-fit: contain;
-  display: none; /* will be enabled by JS */
+  display: none;
   margin: 0;
   position: relative;
   z-index: 0;
   width: 100%;
   height: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
-/* Accessibilité : focus visible sur les liens et boutons */
 a:focus, button:focus, [tabindex]:focus {
   outline: 2px solid #888;
   outline-offset: 2px;
 }
 
-/* Ajouté : retire le contour après clic souris, mais le garde au clavier */
 a:focus:not(:focus-visible),
 button:focus:not(:focus-visible),
 [tabindex]:focus:not(:focus-visible) {
