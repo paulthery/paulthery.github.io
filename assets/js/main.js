@@ -212,7 +212,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (files.length === 0) return;
     currentAlbumKey = nextAlbumKey;
     history.pushState(null, '', `/albums/${currentCategory}/${encodeURIComponent(nextAlbumKey)}`);
-    finishLoad(files);
+    // Animate curtain to cover current image
+    const revealMask = document.getElementById('reveal-mask');
+    const imageMask = document.getElementById('image-mask');
+    if (revealMask) {
+      revealMask.style.transition = 'transform 0.8s ease';
+      revealMask.style.transform = 'translateY(0)';
+    }
+    if (imageMask) {
+      imageMask.style.transition = 'transform 0.8s ease';
+      imageMask.style.transform = 'translateY(0)';
+    }
+    // After the curtain covers (0.8s), load next album and reveal
+    setTimeout(() => {
+      finishLoad(files);
+      if (revealMask) {
+        revealMask.style.transform = 'translateY(-100%)';
+      }
+      if (imageMask) {
+        imageMask.style.transform = 'translateY(-100%)';
+      }
+    }, 800);
   }
 
   function preloadAllMedia() {
@@ -318,6 +338,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('mousemove', (e) => {
     customCursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+    const halfWidth = window.innerWidth / 2;
+    if (indexOverlay && indexOverlay.classList.contains('active')) {
+      if (e.clientX > halfWidth) {
+        customCursor.style.display = 'none';
+        document.body.style.cursor = 'default';
+      } else {
+        customCursor.style.display = 'block';
+        document.body.style.cursor = 'none';
+      }
+      return;
+    }
     const vh = getVH();
     const isInBottomZone = e.clientY >= vh - MARGIN_TOP_BOTTOM;
     if (isInBottomZone) {
@@ -774,7 +805,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   if (galleryOverlay) {
     galleryOverlay.addEventListener('click', e => {
-      if (e.target === galleryOverlay) closeGallery();
+      if (!e.target.closest('.gallery-thumb')) {
+        closeGallery();
+      }
     });
   }
   
