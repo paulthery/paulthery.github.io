@@ -79,7 +79,7 @@
 }
 
 #gallery-nav {
-  font-size: 14px;
+  font-size: 12px;
   height: 80px;
   line-height: 80px;
 }
@@ -96,7 +96,7 @@
 }
 
 #index-overlay.active .index-header .medium {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 #index-overlay.active .albums-list {
@@ -176,6 +176,11 @@ a:focus, button:focus, [tabindex]:focus {
       margin: 20px;
   }
 
+  #image-wrapper.index-mode {
+      transform: translateX(0) !important;
+      z-index: 0;
+  }
+
   #nav {
       position: fixed !important;
       bottom: 25px !important;
@@ -204,7 +209,7 @@ a:focus, button:focus, [tabindex]:focus {
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      padding: calc(var(--nav-gap) + (var(--nav-height) / 2) - 10px) 20px 100px 20px;
+      padding: calc(var(--nav-gap) - 10px) 20px 100px 20px;
       height: calc(100% - 80px);
       transition: transform 0.6s cubic-bezier(0.42, 0, 0.58, 1);
   }
@@ -265,11 +270,6 @@ a:focus, button:focus, [tabindex]:focus {
   #index-overlay.active .index-footer .separator {
       margin: 0 4px;
       opacity: 0.5;
-  }
-
-  #image-wrapper.index-mode {
-      transform: translateX(0) !important;
-      z-index: 0;
   }
 
   #index-overlay.active #index-content {
@@ -375,5 +375,13 @@ a:focus, button:focus, [tabindex]:focus {
     width: 75px;
     height: 75px;
     flex-shrink: 0;
+  }
+
+  #index-overlay.active .index-header .medium {
+    font-size: 16px;
+  }
+
+  #index-overlay.active #index-content {
+    padding: calc(var(--nav-gap) + (var(--nav-height) / 2) - 10px) 20px 100px 20px !important;
   }
 }

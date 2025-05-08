@@ -101,29 +101,6 @@
       }
     }
     
-    // Update all text to 14px font size
-    function updateFontSizes() {
-      const elementsToUpdate = {
-        '#custom-cursor': '14px',
-        '#nav': '14px',
-        '#nav a': '14px',
-        '#gallery-nav': '14px',
-        '#gallery-nav span': '14px',
-        '.albums-list a': '14px',
-        '.albums-list .count': '14px',
-        '.index-footer a': '14px',
-        '.index-footer .separator': '14px',
-        '.index-header .medium': '16px'
-      };
-      
-      for (const selector in elementsToUpdate) {
-        const elements = document.querySelectorAll(selector);
-        elements.forEach(el => {
-          el.style.fontSize = elementsToUpdate[selector];
-        });
-      }
-    }
-    
     // Prevent all scrolling
     function preventAllScrolling() {
       // Hard lock document and body
@@ -227,24 +204,6 @@
               indexContent.style.overflow = 'auto';
               indexContent.style.webkitOverflowScrolling = 'touch';
               indexContent.style.touchAction = 'pan-y';
-              
-              // Hide image wrapper
-              imageWrapper.style.opacity = '0';
-              imageWrapper.style.visibility = 'hidden';
-              
-              // Update font sizes
-              updateFontSizes();
-            }
-            
-            // Fix index footer position
-            const indexFooter = indexOverlay.querySelector('.index-footer');
-            if (indexFooter) {
-              indexFooter.style.position = 'fixed';
-              indexFooter.style.bottom = window.innerWidth > 1024 ? '80px' : '40px';
-              indexFooter.style.left = '40px';
-              indexFooter.style.right = '40px';
-              indexFooter.style.zIndex = '1000';
-              indexFooter.style.background = 'white';
             }
           }
         }, 100);
@@ -332,7 +291,6 @@
       updateViewportSize();
       preventAllScrolling();
       fixIndexOverlay();
-      updateFontSizes();
       setupResizeListener();
       
       // Patch main.js after a delay

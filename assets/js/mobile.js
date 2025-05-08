@@ -8,8 +8,23 @@ if (isMobile) {
 
     const wrapper = document.getElementById('image-wrapper');
     if (wrapper) {
-      wrapper.style.maxHeight = `${vh - 160}px`;
+      const maxHeight = vh - 160;
+      wrapper.style.maxHeight = `${maxHeight}px`;
+      
+      // Ajuster la taille des images/vidéos
+      const media = wrapper.querySelector('#main-image, #main-video');
+      if (media) {
+        media.style.maxHeight = `${maxHeight}px`;
+      }
+      
       updateCursorMobilePosition();
+    }
+
+    // Ajuster la position du nav
+    const nav = document.getElementById('nav');
+    if (nav) {
+      const safeBottom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-bottom')) || 0;
+      nav.style.bottom = `${Math.max(25, safeBottom)}px`;
     }
   }
 
@@ -47,5 +62,25 @@ if (isMobile) {
   window.addEventListener('resize', updateCursorMobilePosition);
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', updateCursorMobilePosition);
+  }
+
+  // Ajouter la gestion du double tap
+  let lastTap = 0;
+  document.addEventListener('touchend', (e) => {
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - lastTap;
+    if (tapLength < 500 && tapLength > 0) {
+      e.preventDefault();
+      return false;
+    }
+    lastTap = currentTime;
+  });
+
+  // Améliorer le défilement de la galerie
+  const galleryScroll = document.getElementById('gallery-scroll');
+  if (galleryScroll) {
+    galleryScroll.addEventListener('touchmove', (e) => {
+      e.stopPropagation();
+    }, { passive: true });
   }
 }

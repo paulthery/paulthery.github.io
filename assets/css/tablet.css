@@ -218,3 +218,16 @@
       }
     }
   }
+  
+/* Add the following to ensure consistent font sizes */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  #nav a,
+  #gallery-nav span,
+  #gallery-nav a,
+  #index-overlay.active .albums-list a,
+  #index-overlay.active .albums-list .count,
+  #index-overlay.active .index-footer a,
+  #index-overlay.active .index-footer .separator {
+    font-size: 12px !important;
+  }
+}

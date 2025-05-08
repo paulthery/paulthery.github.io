@@ -540,6 +540,14 @@ document.addEventListener('DOMContentLoaded', () => {
         buildList(manifest.books,    order.books,    listSecondary, 'books');
 
         indexOverlay.classList.add('active');
+        // On mobile: align index-content top padding to the visual cursor position
+        if (window.innerWidth <= 768) {
+          const cursor = document.getElementById('custom-cursor');
+          if (cursor) {
+            const top = cursor.getBoundingClientRect().top;
+            indexContent.style.paddingTop = `${top}px`;
+          }
+        }
         imageWrapper.classList.add('index-mode');
         imageWrapper.style.transform = 'translateX(-25vw)';
         indexContent.addEventListener('click', ev => {

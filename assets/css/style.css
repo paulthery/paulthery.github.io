@@ -77,7 +77,6 @@ body {
 #gallery-nav .separator {
   color: black;
   font-weight: 300;
-  transform: scaleX(2);
   display: inline-block;
   margin: 0 0.4em;
 }
