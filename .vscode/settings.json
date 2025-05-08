@@ -1,11 +1,6 @@
-
-
 {
-  // Serve files from project root
   "liveServer.settings.root": "/",
-  // Use port 5500 (or change as desired)
   "liveServer.settings.port": 5500,
-  // SPA fallback: rewrite album routes to index.html
   "liveServer.settings.customRewriteRules": [
     {
       "source": "^/albums/.*$",

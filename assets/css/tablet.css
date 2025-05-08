@@ -1,17 +1,14 @@
 @media screen and (min-width: 768px) and (max-width: 1366px) {
-    /* Disable scrolling on tablet view */
     html, body {
       overflow: hidden !important;
       width: 100% !important;
       height: 100% !important;
     }
   
-    /* Same left margin for intro text as on mobile */
     #intro-text {
       left: 40px;
     }
   
-    /* Flex centering and aspect-ratio preservation */
     #main-content {
       position: fixed;
       width: 100%;
@@ -53,7 +50,6 @@
       margin: 20px auto;
     }
   
-    /* Ensure images inside wrapper keep their full ratio without cropping */
     #image-wrapper img,
     #image-wrapper video {
       width: 100% !important;
@@ -103,7 +99,6 @@
       object-fit: contain !important;
     }
   
-    /* Index overlay styles for tablet */
     #index-overlay.active {
       width: 100vw !important;
       height: 100% !important;
@@ -151,7 +146,6 @@
       padding: 0 !important;
     }
     
-    /* Additional styles for larger tablets (iPad Pro 13") */
     @media (min-width: 1025px) {
       #image-wrapper {
         height: auto !important;
@@ -175,17 +169,14 @@
         font-size: 12px !important;
       }
       
-      /* Prevent any overflow issues */
       #main-content {
         overflow: hidden !important;
       }
       
-      /* Ensure gallery view remains optimized */
       #gallery-scroll {
         max-height: calc(var(--vh, 1vh) * 100 - 302px) !important;
       }
       
-      /* Fix index overlay to cover full viewport */
       #index-overlay.active {
         width: 100vw !important;
         height: 100vh !important;
@@ -198,7 +189,7 @@
         height: 100vh !important;
         max-height: 100vh !important;
         overflow-y: auto !important;
-        padding-bottom: 200px !important; /* Extra padding to ensure content is scrollable */
+        padding-bottom: 200px !important;
       }
       
       #index-overlay.active .index-footer {
@@ -219,7 +210,6 @@
     }
   }
   
-/* Add the following to ensure consistent font sizes */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   #nav a,
   #gallery-nav span,

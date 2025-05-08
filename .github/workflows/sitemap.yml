@@ -3,7 +3,7 @@ name: Generate sitemap
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:       # bouton manuel si besoin
+  workflow_dispatch:
 
 jobs:
   build:

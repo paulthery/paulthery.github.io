@@ -1,6 +1,3 @@
-
-
-// scripts/build-albums.js
 const fs = require('fs');
 const path = require('path');
 
@@ -14,13 +11,11 @@ fs.readdirSync(baseDir).forEach(category => {
   if (!fs.statSync(catPath).isDirectory()) return;
   manifest[category] = {};
 
-  // Appliquer l’ordre personnalisé
   const orderedAlbums = (order[category] || []);
   const allAlbums = fs.readdirSync(catPath).filter(album =>
     fs.statSync(path.join(catPath, album)).isDirectory()
   );
 
-  // Albums définis dans order.json
   orderedAlbums.forEach(albumName => {
     const albPath = path.join(catPath, albumName);
     if (!fs.existsSync(albPath)) return;
@@ -29,7 +24,6 @@ fs.readdirSync(baseDir).forEach(category => {
       .map(f => `/albums/${category}/${albumName}/${f}`);
   });
 
-  // Albums restants (non listés dans order.json), triés alpha
   allAlbums
     .filter(a => !orderedAlbums.includes(a))
     .sort()
