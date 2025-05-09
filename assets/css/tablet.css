@@ -6,7 +6,7 @@
     }
   
     #intro-text {
-      left: 40px;
+      left: 80px;
     }
   
     #main-content {
@@ -21,22 +21,39 @@
   
     #nav {
       position: fixed !important;
-      bottom: 25px !important;
-      top: auto !important;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      background: white;
-      z-index: 1;
+      font-size: 12px !important;
+      height: 50px !important;
+      line-height: normal !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      bottom: 50px !important;
+      transform: none !important;
+      background: white !important;
+    }
+
+    #gallery-nav {
+      position: fixed !important;
+      height: 50px !important;
+      line-height: normal !important;
+      bottom: 50px !important;
+      font-size: 12px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: white !important;
     }
   
     #custom-cursor {
       display: block !important;
       position: fixed !important;
       left: 50% !important;
-      transform: translate(-50%, 0) !important;
-      z-index: 3 !important;
-      pointer-events: none !important;
+      top: 65px !important;
+      transform: translateX(-50%) !important;
+      font-size: 12px !important;
+      line-height: normal !important;
+      height: auto !important;
+      z-index: 2 !important;
     }
   
     #image-wrapper {
@@ -47,7 +64,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 20px auto;
+      margin: 0 auto;
+      top: 0;
+      transform: none;
     }
   
     #image-wrapper img,
@@ -116,7 +135,7 @@
       background: white !important;
       display: flex !important;
       flex-direction: column !important;
-      padding-top: 151px !important;
+      padding-top: 145px !important;
       box-sizing: border-box !important;
     }
   
@@ -137,7 +156,7 @@
   
     #index-overlay.active .index-footer {
       position: absolute !important;
-      bottom: 151px !important;
+      bottom: 145px !important;
       left: 40px !important;
       right: 40px !important;
       display: flex !important;
@@ -156,12 +175,12 @@
       }
       
       #custom-cursor {
-        top: 30px !important;
+        top: 65px !important;
         font-size: 12px !important;
       }
       
       #nav {
-        bottom: 40px !important;
+        bottom: 50px !important;
         font-size: 12px !important;
       }
       

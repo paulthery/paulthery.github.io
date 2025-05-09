@@ -11,7 +11,6 @@ if (isMobile) {
       const maxHeight = vh - 160;
       wrapper.style.maxHeight = `${maxHeight}px`;
       
-      // Ajuster la taille des images/vidéos
       const media = wrapper.querySelector('#main-image, #main-video');
       if (media) {
         media.style.maxHeight = `${maxHeight}px`;
@@ -20,7 +19,6 @@ if (isMobile) {
       updateCursorMobilePosition();
     }
 
-    // Ajuster la position du nav
     const nav = document.getElementById('nav');
     if (nav) {
       const safeBottom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-bottom')) || 0;
@@ -64,7 +62,6 @@ if (isMobile) {
     window.visualViewport.addEventListener('resize', updateCursorMobilePosition);
   }
 
-  // Ajouter la gestion du double tap
   let lastTap = 0;
   document.addEventListener('touchend', (e) => {
     const currentTime = new Date().getTime();
@@ -76,7 +73,6 @@ if (isMobile) {
     lastTap = currentTime;
   });
 
-  // Améliorer le défilement de la galerie
   const galleryScroll = document.getElementById('gallery-scroll');
   if (galleryScroll) {
     galleryScroll.addEventListener('touchmove', (e) => {
