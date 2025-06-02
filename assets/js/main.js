@@ -67,6 +67,7 @@ window.addEventListener('unhandledrejection', function(event) {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.body.style.cursor = 'pointer';
   const mediaCache = new MediaCacheManager();
 
   function appendItem(container, route, key, count) {
@@ -83,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function buildList(manifestSection, orderList, container, route) {
     if (!manifestSection || !orderList || !container) {
-      console.warn('buildList: manifestSection, orderList ou container manquant', {manifestSection, orderList, container, route});
       return;
     }
     const added = new Set();
@@ -94,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
         k.toLowerCase() === slug.toLowerCase()
       );
       if (!key) {
-        console.warn(`Album "${slug}" not found in manifest section "${route}"`);
         return;
       }
       added.add(key);
@@ -193,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
     currentIndex = 0;
     updateImage();
     galleryImages = images;
-    console.debug('Media files loaded:', files);
   }
 
   function nextAlbum() {
@@ -212,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (files.length === 0) return;
     currentAlbumKey = nextAlbumKey;
     history.pushState(null, '', `/albums/${currentCategory}/${encodeURIComponent(nextAlbumKey)}`);
-    // Animate curtain to cover current image
     const revealMask = document.getElementById('reveal-mask');
     const imageMask = document.getElementById('image-mask');
     if (revealMask) {
@@ -223,7 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
       imageMask.style.transition = 'transform 0.8s ease';
       imageMask.style.transform = 'translateY(0)';
     }
-    // After the curtain covers (0.8s), load next album and reveal
     setTimeout(() => {
       finishLoad(files);
       if (revealMask) {
@@ -238,7 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function preloadAllMedia() {
     manifestPromise.then(manifest => {
       if (!manifest || !manifest.work || !manifest.projects || !manifest.books) {
-        console.warn('preloadAllMedia: manifest incomplet', manifest);
         return;
       }
       const allFiles = [
@@ -281,7 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   if (!introText || !mainContent || !mainImage) {
-    console.warn('Certains éléments d\'intro sont absents — intro désactivée.');
     if (mainContent) mainContent.style.display = 'flex';
   } else {
     setTimeout(() => {
@@ -321,18 +315,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2400);
   }
 
-  // FIXED CUSTOM CURSOR IMPLEMENTATION
   const customCursor = document.createElement('div');
   customCursor.id = 'custom-cursor';
   document.body.appendChild(customCursor);
+  customCursor.style.opacity = '0';
 
-  // Simple mousemove handler - just follow the mouse
   document.addEventListener('mousemove', (e) => {
-    customCursor.style.left = e.clientX + 'px';
-    customCursor.style.top = e.clientY + 'px';
+    const elementUnder = document.elementFromPoint(e.clientX, e.clientY);
+    const overNavLink = elementUnder && elementUnder.closest('#nav a');
+    const overIndexArea = elementUnder && elementUnder.closest('#index-content');
+    const overIndexLink = elementUnder && elementUnder.closest('#index-content a');
+    if (overIndexArea) {
+      document.body.style.cursor = 'pointer';
+    } else {
+      document.body.style.cursor = 'none';
+    }
+
+    if (overNavLink || overIndexArea) {
+      const rectSource = overNavLink ? overNavLink : overIndexArea;
+      const linkRect = rectSource.getBoundingClientRect();
+      setTimeout(() => {
+        if (overNavLink) {
+          customCursor.style.transition = 'top 0.5s ease, opacity 0.5s ease';
+          customCursor.style.top = (linkRect.top - 50) + 'px';
+        } else {
+          customCursor.style.transition = 'left 0.5s ease, opacity 0.5s ease';
+          customCursor.style.left = (e.clientX - 50) + 'px';
+        }
+        customCursor.style.opacity = '0';
+        document.body.classList.add('cursor-off');
+        setTimeout(() => {
+          customCursor.style.transition = 'none';
+        }, 500);
+      }, 100);
+    } else {
+      document.body.classList.remove('cursor-off');
+      customCursor.style.transition = 'none';
+      customCursor.style.left = e.clientX + 'px';
+      customCursor.style.top = e.clientY + 'px';
+      if (document.body.classList.contains('intro-complete')) {
+        customCursor.style.opacity = '1';
+      }
+    }
   });
 
-  // Hide cursor when mouse leaves window
   document.addEventListener('mouseleave', () => {
     customCursor.style.opacity = '0';
   });
@@ -434,20 +460,20 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContent.style.display = 'flex';
         if (mainImage) mainImage.style.opacity = '1';
         mainContent.classList.add('loaded');
-        document.body.classList.add('intro-complete');
       }
-      
+
       const imageMask = document.getElementById('image-mask');
       if (imageMask) {
         imageMask.style.transition = 'transform 0.8s ease';
         imageMask.style.transform = 'translateY(-100%)';
+
+        imageMask.addEventListener('transitionend', () => {
+          document.body.classList.add('intro-complete');
+        }, { once: true });
+      } else {
+        document.body.classList.add('intro-complete');
       }
-      
-      if (customCursor) {
-        customCursor.style.opacity = '1';
-        updateCursor();
-      }
-      
+
       updateImage();
       updateNavPosition();
     }, 800);
@@ -670,6 +696,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (nav) nav.style.display = 'none';
     
     galleryOverlay.style.display = 'block';
+    // Hide custom cursor when gallery is open
+    const customCursor = document.getElementById('custom-cursor');
+    if (customCursor) customCursor.style.setProperty('display', 'none', 'important');
+    document.body.style.cursor = 'pointer';
     galleryOverlay.style.transform = 'translateY(0)';
     
     setTimeout(() => {
@@ -768,6 +798,10 @@ document.addEventListener('DOMContentLoaded', () => {
         galleryScroll.style.opacity = '';
       }, 800);
     }, 400);
+    // Show custom cursor again after closing gallery
+    const customCursor = document.getElementById('custom-cursor');
+    if (customCursor) customCursor.style.removeProperty('display');
+    document.body.style.cursor = 'pointer';
   }
 
   if (galleryTrigger) {
@@ -817,10 +851,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mainImage.style.height = 'auto';
     
     updateNavPosition();
-  }
-  function updateCaptionClasses() {
-    if (document.querySelector('.album-title')) return;
-    
   }
   
   updateImageStep();

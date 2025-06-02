@@ -65,13 +65,11 @@
     const isPortrait = window.matchMedia('(orientation: portrait)').matches;
 
     if (isTouch) {
-      // Always load mobile script on any touch device
       const mobileScript = document.createElement('script');
       mobileScript.src = '/assets/js/mobile.js';
       mobileScript.defer = true;
       document.head.appendChild(mobileScript);
 
-      // Load tablet script only on tablets
       if (isTablet) {
         const tabletScript = document.createElement('script');
         tabletScript.src = '/assets/js/tablet.js';

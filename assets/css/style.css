@@ -23,11 +23,6 @@ body {
   isolation: isolate;
 }
 
-* {
-  letter-spacing: 0;
-  cursor: none !important;
-}
-
 @font-face {
   font-family: "Untitled Sans";
   src: url("/assets/fonts/Untitled Sans Regular.woff2") format("woff2");
@@ -249,7 +244,6 @@ body {
   cursor: pointer;
 }
 
-/* FIXED CUSTOM CURSOR STYLES */
 #custom-cursor {
   position: fixed !important;
   top: 0;
@@ -261,8 +255,6 @@ body {
   color: white;
   mix-blend-mode: exclusion;
   transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease;
-  will-change: transform;
   opacity: 0;
   white-space: nowrap;
   font-family: "Untitled Sans", Helvetica, Arial, sans-serif;
@@ -407,7 +399,7 @@ body {
   height: 100%;
   background: white;
   transform: translateX(100%);
-  transition: transform 0.6s cubic-bezier(0.42, 0, 0.58, 1);
+  transition: transform 0.6s ease-in-out;
   z-index: 4;
 }
 
@@ -415,7 +407,7 @@ body {
   transform: translateX(0);
   padding-top: 100px;
   color: black;
-  transition-delay: 0.2s;
+  transition: transform 0.6s ease-in-out;
 }
 
 #index-overlay.active .index-header {
@@ -542,4 +534,19 @@ a:focus:not(:focus-visible),
 button:focus:not(:focus-visible),
 [tabindex]:focus:not(:focus-visible) {
   outline: none;
+}
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+[tabindex]:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Override to restore native cursor when off-wrapper */
+body.cursor-off * {
+  cursor: auto !important;
+}
+
+body.cursor-off #custom-cursor {
+  opacity: 0 !important;
+  transition: opacity 0.3s ease;
 }
