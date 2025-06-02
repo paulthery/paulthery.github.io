@@ -20,10 +20,12 @@ body {
   color: var(--text-color);
   cursor: none;
   scroll-behavior: smooth;
+  isolation: isolate;
 }
 
 * {
   letter-spacing: 0;
+  cursor: none !important;
 }
 
 @font-face {
@@ -135,7 +137,7 @@ body {
 
 #image-wrapper.index-mode {
   transform: translateX(-25%);
-  z-index: 0; /* Ajout du z-index */
+  z-index: 0;
 }
 
 #reveal-mask {
@@ -247,25 +249,38 @@ body {
   cursor: pointer;
 }
 
+/* FIXED CUSTOM CURSOR STYLES */
 #custom-cursor {
-  position: fixed;
+  position: fixed !important;
   top: 0;
   left: 0;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 3;
+  pointer-events: none !important;
+  z-index: 99999 !important;
   font-weight: 300;
-  font-size: 12px;
+  font-size: 14px;
   color: white;
-  transition: color 0.2s ease;
+  mix-blend-mode: exclusion;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
   will-change: transform;
-  mix-blend-mode: difference;
-  background-color: transparent;
+  opacity: 0;
+  white-space: nowrap;
+  font-family: "Untitled Sans", Helvetica, Arial, sans-serif;
 }
 
-body:not(.intro-complete) #custom-cursor {
-  display: none !important;
-  opacity: 0 !important;
+/* Only show cursor on desktop and when intro is complete */
+@media (min-width: 769px) {
+  body.intro-complete #custom-cursor {
+    opacity: 1 !important;
+    display: block !important;
+  }
+}
+
+/* Hide cursor on mobile/tablet */
+@media (max-width: 768px) {
+  #custom-cursor {
+    display: none !important;
+  }
 }
 
 #gallery-overlay {
@@ -308,7 +323,6 @@ body:not(.intro-complete) #custom-cursor {
   z-index: 101;
 }
 
-/* Deux colonnes en moins à chaque palier */
 @media (max-width: calc(11 * 134px + 10 * 30px)) {
   #gallery-grid {
     grid-template-columns: repeat(9, 134px);
@@ -393,7 +407,7 @@ body:not(.intro-complete) #custom-cursor {
   height: 100%;
   background: white;
   transform: translateX(100%);
-  transition: transform 0.6s cubic-bezier(0.42, 0, 0.58, 1); /* Adjust this value */
+  transition: transform 0.6s cubic-bezier(0.42, 0, 0.58, 1);
   z-index: 4;
 }
 
@@ -401,7 +415,7 @@ body:not(.intro-complete) #custom-cursor {
   transform: translateX(0);
   padding-top: 100px;
   color: black;
-  transition-delay: 0.2s; /* Adjust this value */
+  transition-delay: 0.2s;
 }
 
 #index-overlay.active .index-header {

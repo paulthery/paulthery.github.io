@@ -321,44 +321,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2400);
   }
 
+  // FIXED CUSTOM CURSOR IMPLEMENTATION
   const customCursor = document.createElement('div');
   customCursor.id = 'custom-cursor';
-  customCursor.style.position = 'fixed';
-  customCursor.style.pointerEvents = 'none';
-  customCursor.style.fontFamily = '"Untitled Sans", Helvetica, Arial, sans-serif';
-  customCursor.style.fontWeight = '300';
-  customCursor.style.fontSize = '12px';
-  customCursor.style.zIndex = '10000';
-  customCursor.style.transition = 'color 0.2s ease';
-  customCursor.style.mixBlendMode = 'difference';
-  customCursor.style.color = 'white';
-  customCursor.style.display = 'none';
-  customCursor.style.opacity = '0';
   document.body.appendChild(customCursor);
 
+  // Simple mousemove handler - just follow the mouse
   document.addEventListener('mousemove', (e) => {
-    customCursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-    const halfWidth = window.innerWidth / 2;
-    if (indexOverlay && indexOverlay.classList.contains('active')) {
-      if (e.clientX > halfWidth) {
-        customCursor.style.display = 'none';
-        document.body.style.cursor = 'default';
-      } else {
-        customCursor.style.display = 'block';
-        document.body.style.cursor = 'none';
-      }
-      return;
-    }
-    const vh = getVH();
-    const isInBottomZone = e.clientY >= vh - MARGIN_TOP_BOTTOM;
-    if (isInBottomZone) {
-      customCursor.style.display = 'none';
-      document.body.style.cursor = 'default';
-    } else {
-      if (document.body.classList.contains('intro-complete')) {
-        customCursor.style.display = 'block';
-        document.body.style.cursor = 'none';
-      }
+    customCursor.style.left = e.clientX + 'px';
+    customCursor.style.top = e.clientY + 'px';
+  });
+
+  // Hide cursor when mouse leaves window
+  document.addEventListener('mouseleave', () => {
+    customCursor.style.opacity = '0';
+  });
+
+  document.addEventListener('mouseenter', () => {
+    if (document.body.classList.contains('intro-complete')) {
+      customCursor.style.opacity = '1';
     }
   });
 
@@ -417,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
         imgEl.style.display = 'block';
         imgEl.src = src;
       }
-      imgEl.alt = `Image ${currentIndex + 1} sur ${totalImages} de l’album`;
+      imgEl.alt = `Image ${currentIndex + 1} sur ${totalImages} de l'album`;
     }
 
     updateCursor();
@@ -463,9 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       if (customCursor) {
-        customCursor.style.display = 'block';
         customCursor.style.opacity = '1';
-        
         updateCursor();
       }
       
