@@ -251,7 +251,7 @@ body {
   pointer-events: none !important;
   z-index: 99999 !important;
   font-weight: 300;
-  font-size: 14px;
+  font-size: 12px;
   color: white;
   mix-blend-mode: exclusion;
   transform: translate(-50%, -50%);
