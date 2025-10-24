@@ -1,0 +1,54 @@
+{
+  "name": "paulthery.github.io",
+  "version": "2.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "node scripts/build/build-albums.js",
+    "rebuild": "node scripts/build/rebuild-albums.js",
+    "watch-albums": "node scripts/utils/watch-albums.js",
+    "dev": "npm run watch-albums",
+    "clean": "node scripts/utils/clean-cache.js",
+    "update-js": "node scripts/utils/update-js-version.js",
+    "build-sitemaps": "node scripts/build/build-sitemaps.js",
+    "build-robots": "node scripts/build/build-robots-all.js",
+    "optimize-images": "node scripts/optimization/optimize-images.js",
+    "optimize-images:force": "node scripts/optimization/optimize-images.js --force",
+    "optimize-images:clean": "node scripts/optimization/optimize-images.js --clean",
+    "export-images": "bash scripts/optimization/export-png-to-avif.sh",
+    "export-videos": "bash scripts/optimization/export-videos-h265.sh",
+    "clean-exports": "bash scripts/utils/clean-exports.sh",
+    "build:minify": "terser assets/js/main.js -o assets/js/main.min.js -c -m && terser assets/js/modules/format-detector.js -o assets/js/modules/format-detector.min.js -c -m && terser assets/js/modules/media-cache.js -o assets/js/modules/media-cache.min.js -c -m && terser assets/js/modules/ui-helpers.js -o assets/js/modules/ui-helpers.min.js -c -m && terser assets/js/modules/slideshow.js -o assets/js/modules/slideshow.min.js -c -m",
+    "build:minify-css": "cleancss -o assets/css/main.min.css assets/css/main.css",
+    "build:full": "npm run export-images && npm run export-videos && npm run build && npm run build:minify && npm run build:minify-css && npm run update-js && npm run build-sitemaps && npm run build-robots",
+    "bump": "node scripts/build/build-and-bump.js",
+    "test": "node scripts/utils/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulthery/paulthery.github.io.git"
+  },
+  "keywords": [
+    "photography",
+    "art direction",
+    "portfolio",
+    "paul thery",
+    "studio"
+  ],
+  "author": "Paul Thery",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulthery/paulthery.github.io/issues"
+  },
+  "homepage": "https://github.com/paulthery/paulthery.github.io#readme",
+  "description": "Photographer & Art director Based in Paris. Portfolio of personal and commissioned work.",
+  "devDependencies": {
+    "@types/node": "^24.9.1",
+    "chokidar": "^4.0.3",
+    "clean-css-cli": "^5.6.3",
+    "sharp": "^0.34.4",
+    "terser": "^5.44.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

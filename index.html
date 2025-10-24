@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- CSP: Enhanced security policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self' https://static.cloudflareinsights.com https://cloudflareinsights.com;">
+  <meta name="robots" content="index, follow">
+  <title>Paul Thery Studio</title>
+  <link rel="canonical" href="https://paulthery.com/" id="canonical">
+  <meta name="description" content="Paul Thery Studio — Photographer & Art Director based in Paris. Portfolio of personal and commissioned work.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://paulthery.com/" id="og-url">
+  <meta property="og:title" content="Paul Thery Studio">
+  <meta property="og:description" content="Photographer & Art Director based in Paris. Portfolio of personal and commissioned work.">
+  <meta property="og:image" content="https://paulthery.com/assets/logo.png" id="og-image">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Paul Thery Studio">
+  <meta name="twitter:description" content="Photographer & Art Director based in Paris. Portfolio of personal and commissioned work.">
+  <meta name="twitter:image" content="https://paulthery.com/assets/logo.png" id="twitter-image">
+
+  <!-- Preconnect for Cloudflare Insights -->
+  <link rel="preconnect" href="https://static.cloudflareinsights.com">
+
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="/assets/fonts/Untitled Sans Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/Untitled Sans Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/Untitled Sans Light.woff2" as="font" type="font/woff2" crossorigin>
+
+
+
+  <!-- CSS Bundle - optimized single load -->
+  <link rel="stylesheet" href="/assets/css/main.min.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#000000">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="msapplication-TileImage" content="mstile-144x144.png">
+  <!-- Preload first image from photography/recent album -->
+  <link rel="preload" as="image" href="/photography/recent/001_desktop.avif" type="image/avif">
+
+  <!-- Cloudflare Insights -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "0c5e46ddbf3d4a2d981ac429d2e49dc9"}'></script>
+
+  <!-- Structured Data (JSON-LD) for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Paul Thery",
+    "url": "https://paulthery.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/paulthery/",
+      "https://twitter.com/paulthery",
+      "https://paulthery.studio"
+    ],
+    "jobTitle": ["Photographer", "Art Director"],
+    "description": "Photographer & Art Director based in Paris. Portfolio of personal and commissioned work.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Paris",
+      "addressCountry": "FR"
+    },
+    "email": "studio@paulthery.com",
+    "image": "https://paulthery.com/assets/logo.png",
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Photography & Art Direction"
+    },
+    "knowsAbout": ["Photography", "Art Direction", "Visual Arts", "Commercial Photography", "Fashion Photography"]
+  }
+  </script>
+</head>
+<body>
+  <div id="curtain-overlay" class="pos-fixed inset-0 wh-full z-50 pointer-none transition-transform"></div>
+  <div id="intro-text">
+    <span class="medium">Paul Thery</span>
+    <span class="light">Studio</span>
+  </div>
+  <div id="main-content" class="flex-center" role="main">
+    <div id="image-wrapper" class="pos-relative flex-center z-1 transition-transform" role="region" aria-label="Image slideshow">
+      <div id="reveal-mask" class="pos-absolute inset-0 wh-full z-3 transition-transform" role="presentation"></div>
+        <img id="main-image" src="/photography/recent/001_desktop.avif" width="2000" height="2500" alt="Paul Thery - Recent photography work" aria-live="polite" fetchpriority="high">
+      <video id="main-video" loop autoplay playsinline webkit-playsinline preload="auto" muted title="Featured video work" aria-label="Featured video work"></video>
+      <div id="image-mask" class="pos-absolute inset-0 wh-full z-2 transition-transform" role="presentation"></div>
+      <div id="logo-overlay">
+        <img id="logo-image" src="" alt="">
+      </div>
+    </div>
+    <nav id="nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="#" id="index-trigger" aria-label="Open work index">Index</a></li>
+        <li><span class="separator" aria-hidden="true"> — </span></li>
+        <li><a href="#" data-gallery aria-label="Open gallery view">Gallery</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div id="gallery-overlay" role="dialog" aria-label="Gallery view" aria-modal="true">
+    <div id="gallery-top-mask" class="transition-transform" role="presentation"></div>
+    <div id="gallery-bottom-mask" class="transition-transform" role="presentation"></div>
+    <div id="gallery-nav" role="navigation" aria-label="Gallery navigation">
+      <span>recent</span>
+      <span class="separator" aria-hidden="true"> — </span>
+      <span id="close-gallery" role="button" tabindex="0" aria-label="Close gallery">Close</span>
+    </div>
+    <div id="gallery-scroll">
+      <div id="gallery-grid" role="grid" aria-label="Gallery grid"></div>
+    </div>
+  </div>
+  <div id="index-overlay" role="dialog" aria-label="Work index" aria-modal="true">
+    <div id="index-mask" class="transition-background" role="presentation"></div>
+    <div id="index-content" class="transition-transform-fast" role="navigation" aria-label="Album navigation"></div>
+  </div>
+  <script src="/assets/js/main.min.js?v=20251024121654" type="module" defer></script>
+</body>
+</html>

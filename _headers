@@ -1,0 +1,33 @@
+# Cache and Security Headers for Cloudflare Pages
+
+# Global security headers for all pages
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self' https://static.cloudflareinsights.com https://cloudflareinsights.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+
+# Static assets (JS, CSS, fonts) - cache 1 year immutable
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# AVIF images - cache 1 year immutable
+/*.avif
+  Cache-Control: public, max-age=31536000, immutable
+
+# MP4 videos - cache 1 year immutable
+/*.mp4
+  Cache-Control: public, max-age=31536000, immutable
+
+# Albums JSON - cache 1h with revalidation
+/albums.json
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# HTML pages - cache 1h with revalidation
+/
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/artdirection
+  Cache-Control: public, max-age=3600, must-revalidate
