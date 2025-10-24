@@ -842,7 +842,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const safeTop = parseFloat(computed.getPropertyValue('--safe-top')) || 0;
             const blankAbove = rect.top - safeTop;
             const topPos = safeTop + (blankAbove / 2) - (cursor.offsetHeight / 2);
-            cursor.style.top = `${Math.max(20, topPos + 20)}px`;
+            cursor.style.top = `${Math.max(20, topPos)}px`;
         } else {
             const safeTop = parseFloat(computed.getPropertyValue('--safe-top')) || 0;
             const blankAbove = rect.top - safeTop;
