@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://paulthery.com/sitemap-paulthery-com.xml
+Sitemap: https://paulthery.studio/sitemap-paulthery-studio.xml

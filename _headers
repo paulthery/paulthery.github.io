@@ -1,0 +1,40 @@
+# Security headers for Cloudflare Pages
+# Automatically applied by the optimization script
+
+# General security headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(self), sync-xhr=()
+
+# Headers for static assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# Headers for images
+/*.{jpg,jpeg,png,gif,webp,avif,svg}
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# Headers for CSS files
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# Headers for JavaScript files
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# Headers for HTML files
+/*.html
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
+
+# Headers for data files
+/*.{json,xml}
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
