@@ -1,0 +1,24 @@
+# Redirects for Cloudflare Pages
+# Automatically applied by the optimization script
+
+# Redirect www to non-www - DISABLED (handled by Cloudflare Rules instead)
+# https://www.paulthery.com/* https://paulthery.com/:splat 301
+# https://www.paulthery.studio/* https://paulthery.studio/:splat 301
+
+# Redirect HTTP to HTTPS (usually handled by Cloudflare)
+http://paulthery.com/* https://paulthery.com/:splat 301
+http://paulthery.studio/* https://paulthery.studio/:splat 301
+
+# No redirect from the root. Art direction opens there anyway - main.js treats
+# '/' and '/artdirection' alike - so sending the browser on to /artdirection
+# only changed the address bar. The root keeps its own clean URL.
+#
+# Note for whoever adds one later: a source qualified by domain
+# (https://paulthery.com/) is NOT honoured here. It deploys without complaint
+# and does nothing. Bare paths only.
+
+# Redirects for old URLs (if necessary)
+# /old-page /new-page 301
+
+# Redirect for files not found to the home page
+/404.html / 404
